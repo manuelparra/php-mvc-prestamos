@@ -1,3 +1,14 @@
+##### VisualStudioCode
+./.vscode
+.vscode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db
@@ -262,14 +273,6 @@ GitHub.sublime-settings
 *.tmproj
 *.tmproject
 tmtags
-
-##### VisualStudioCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace
 
 # Local History for Visual Studio Code
 .history/
