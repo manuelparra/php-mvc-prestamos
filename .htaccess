@@ -1,0 +1,25 @@
+RewriteEngine On
+Options All -Indexes
+
+# Camouflaging PHP files as NAS
+AddType application/x-httpd-php .nas
+
+# Ajax request
+RewriteRule ^(endpoint/.*)$ /index.php?endpoint=$1 [L]
+
+# Allows friendly URLs
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ /index.php?view=$1
+
+# Remover extencion .php
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1/ [NC,L,R]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
+# Redirect 404 errors
+ErrorDocument 404 /views=404/
+
+
+
+
+
