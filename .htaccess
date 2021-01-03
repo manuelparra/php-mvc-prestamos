@@ -1,6 +1,8 @@
 RewriteEngine On
 Options All -Indexes
 
+RewriteBase /
+
 # Camouflaging PHP files as NAS
 AddType application/x-httpd-php .nas
 

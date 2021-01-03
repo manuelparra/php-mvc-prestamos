@@ -62,3 +62,6 @@ login
 ./views/contents/user-new-view.php
 ./views/contents/user-new-view.php
 ./views/contents/user-new-view.php
+login
+./views/contents/home-view.php
+login

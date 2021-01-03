@@ -14,8 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// Local Enviroment, comment this lines if you put this files in a production environment
 const SERVER_URL = "http://prestamos.com/";
 const ERROR_DIR = "/var/www/html/learning/fullstack/php/sistemas/prestamos/logs/";
+
+// Production Enviroment, comment this lines if you put this files in a developer environment
+// const SERVER_URL = "https://prestamos.desliate.com/";
+// const ERROR_DIR = "/var/www/desliate.com/prestamos/logs/";
+
 const COMPANY = "SISTEMA DE PRESTAMOS";
 const MONEDA = "€";
 
