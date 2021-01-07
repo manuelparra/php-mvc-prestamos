@@ -46,9 +46,8 @@ class userController extends userModel {
         }
 
         /*==  Check data's ingrity ==*/
-
         /*== Check DNI ==*/
-        if (mainModel::check_data("[0-9]{8}[-]{1}[TRWAGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
+        if (mainModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
             $res = $this->message_with_parameters("simple", "error", "El DNI no coincide con el formato solicitado.",
                                                   "Formato de DNI erróneo");
             return $res;
@@ -98,7 +97,7 @@ class userController extends userModel {
 
         /*== Check passwords ==*/
         if ($clave1 == $clave2) {
-            if (mainModel::check_data("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", $clave1)) {
+            if (mainModel::check_data("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8, 100}", $clave1)) {
                 $res = $this->message_with_parameters("simple", "error", "La Contraseña no coincide con el formato solicitado.",
                                                       "Formato de Contraseña erróneo");
                 return $res;

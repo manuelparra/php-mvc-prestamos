@@ -22,7 +22,7 @@ const ERROR_DIR = "/var/www/html/learning/fullstack/php/sistemas/prestamos/logs/
 // const SERVER_URL = "https://prestamos.desliate.com/";
 // const ERROR_DIR = "/var/www/desliate.com/prestamos/logs/";
 
-const COMPANY = "SISTEMA DE PRESTAMOS";
+const COMPANY = "Sistema de Prestamos";
 const MONEDA = "€";
 
 date_default_timezone_set("Europe/Madrid");

@@ -38,6 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             if ($view == "login" || $view == "404" ) {
                 require_once "./views/contents/" . $view . "-view.php";
             } else {
+                session_start(['name'=>'SPM']);
         ?>
         <!-- Main container -->
         <main class="full-box main-container">

@@ -84,14 +84,14 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="usuario_clave_1" class="bmd-label-floating">Contraseña</label>
-                            <input type="password" class="form-control" name="usuario_clave_1_reg" id="usuario_clave_1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="100"
+                            <input type="password" class="form-control" name="usuario_clave_1_reg" id="usuario_clave_1" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$" maxlength="100"
                             title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres" required >
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="usuario_clave_2" class="bmd-label-floating">Repetir contraseña</label>
-                            <input type="password" class="form-control" name="usuario_clave_2_reg" id="usuario_clave_2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="100"
+                            <input type="password" class="form-control" name="usuario_clave_2_reg" id="usuario_clave_2" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$" maxlength="100"
                             title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres" required >
                         </div>
                     </div>

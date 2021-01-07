@@ -14,11 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ($ajaxReq) {
-    require_once "./models/mainModel.php";
-} else {
-    require_once "./mainModel.php";
-}
+require_once "./models/mainModel.php";
 
 /*--- Class Login Model ---*/
 class loginModel extends mainModel {
