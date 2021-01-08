@@ -36,7 +36,6 @@
                             title="Debe contener ocho numeros, un guión y una letra mayúscula" required >
                         </div>
                     </div>
-
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label for="usuario_nombre" class="bmd-label-floating">Nombres</label>
@@ -59,6 +58,14 @@
                         <div class="form-group">
                             <label for="usuario_direccion" class="bmd-label-floating">Dirección</label>
                             <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="usuario_direccion_reg" id="usuario_direccion" maxlength="190">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group bmd-form-group">
+                            <select class="form-control" name="usuario_perfil_reg" id="usuario_perfil">
+                                <option value="Seleccione" selected="" disabled="">Seleccione un perfil</option>
+                                <option value="Web Developer">Web Developer</option>
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -94,6 +94,7 @@ class loginController extends loginModel {
             $_SESSION['apellido_spm'] = $row['usuario_apellido'];
             $_SESSION['usuario_spm'] = $row['usuario_usuario'];
             $_SESSION['privilegio_spm'] = $row['usuario_privilegio'];
+            $_SESSION['perfil_spm'] = $row['perfil_nombre'];
             $_SESSION['token_spm'] = md5(uniqid(mt_rand(), true));
 
             return header("Location: " . SERVER_URL . "home/");
@@ -111,6 +112,18 @@ class loginController extends loginModel {
             ';
 
             return;
+        }
+    }
+
+    /* Forse Close Session Controller */
+    public function force_close_session_controller() {
+        session_unset();
+        session_destroy();
+
+        if (headers_sent()) { // If headers are being sent,
+            return "<script> window.location.href='" . SERVER_URL . "login/'; </script>";
+        } else {
+            return header("Location: " . SERVER_URL . "login/");
         }
     }
 

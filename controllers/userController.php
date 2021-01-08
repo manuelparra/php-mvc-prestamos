@@ -27,6 +27,7 @@ class userController extends userModel {
         $apellido = mainModel::clean_string($_POST['usuario_apellido_reg']);
         $telefono = mainModel::clean_string($_POST['usuario_telefono_reg']);
         $direccion = mainModel::clean_string($_POST['usuario_direccion_reg']);
+        $perfil = mainModel::clean_string($_POST['usuario_perfil_reg']);
 
         $usuario = mainModel::clean_string($_POST['usuario_usuario_reg']);
         $email = mainModel::clean_string($_POST['usuario_email_reg']);
@@ -117,7 +118,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check DNI as unique data ==*/
+        /*== Check DNI as unique data ==*/
         $query = mainModel::execute_simple_query("SELECT usuario_dni
                                                   FROM usuario
                                                   WHERE usuario_dni = '$dni'");
@@ -127,7 +128,24 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check USER as unique data ==*/
+        /*== Check Perfil as a record stored in database ==*/
+        if ($perfil != "" && $perfil != "Seleccione") {
+            $query = mainModel::execute_simple_query("SELECT perfil_id
+                                                    FROM perfil
+                                                    WHERE perfil_nombre = '$perfil'");
+            if ($query->rowCount() != 1 ) {
+                $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                    "¡El perfil seleccionado no se encuentra registrado en el sistema!");
+                return $res;
+            } else {
+                $row = $query->fetch();
+                $perfil_id = $row['perfil_id'];;
+            }
+
+        } else {
+            $perfil_id = NULL;
+        }
+        /*==  Check User as unique data ==*/
         $query = mainModel::execute_simple_query("SELECT usuario_usuario
                                                   FROM usuario
                                                   WHERE usuario_usuario = '$usuario'");
@@ -153,6 +171,7 @@ class userController extends userModel {
             "apellido" => $apellido,
             "telefono" => $telefono,
             "direccion" => $direccion,
+            "pefil" => is_null($perfil_id) ? $perfil_id : (int) $perfil_id,
             "email" => $email,
             "usuario" => $usuario,
             "clave" => $clave,

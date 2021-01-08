@@ -26,10 +26,10 @@ class userModel extends mainModel {
     protected static function add_user_model($data) {
 
         $sql = "INSERT INTO usuario (usuario_dni, usuario_nombre, usuario_apellido,
-                usuario_telefono, usuario_direccion, usuario_email, usuario_usuario,
-                usuario_clave, usuario_estado, usuario_privilegio)
-                VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :email,
-                :usuario, :clave, :estado, :privilegio)";
+                usuario_telefono, usuario_direccion, usuario_perfil_id, usuario_email,
+                usuario_usuario, usuario_clave, usuario_estado, usuario_privilegio)
+                VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :perfil,
+                :email, :usuario, :clave, :estado, :privilegio)";
 
         $query = mainModel::connection()->prepare($sql);
 
@@ -38,6 +38,7 @@ class userModel extends mainModel {
         $query->bindParam(":apellido", $data['apellido']);
         $query->bindParam(":telefono", $data['telefono']);
         $query->bindParam(":direccion", $data['direccion']);
+        $query->bindParam(":perfil", $data['perfil']);
         $query->bindParam(":email", $data['email']);
         $query->bindParam(":usuario", $data['usuario']);
         $query->bindParam(":clave", $data['clave']);

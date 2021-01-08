@@ -20,15 +20,16 @@ require_once "./models/mainModel.php";
 class loginModel extends mainModel {
     /*-- Login model --*/
     protected static function login_model($data) {
-        $sql = "SELECT  *
-                FROM usuario
-                WHERE usuario_usuario = :usuario
-                AND usuario_clave = :clave
-                AND usuario_estado = 'Activa'";
+        $sql = "SELECT  usuario.*, perfil.perfil_nombre
+                FROM usuario LEFT JOIN perfil ON usuario.usuario_perfil_id = perfil.perfil_id
+                WHERE usuario.usuario_usuario = :usuario
+                AND usuario.usuario_clave = :clave
+                AND usuario.usuario_estado = 'Activa'";
         $query = mainModel::connection()->prepare($sql);
         $query->bindParam(":usuario", $data['usuario']);
         $query->bindParam(":clave", $data['clave']);
         $query->execute();
+
         return $query;
     }
 }

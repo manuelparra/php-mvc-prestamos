@@ -39,6 +39,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                 require_once "./views/contents/" . $view . "-view.php";
             } else {
                 session_start(['name'=>'SPM']);
+
+                require_once "./controllers/loginController.php";
+
+                $insLoginController = new loginController();
+
+                if (!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm'])
+                || !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm'])) {
+                    echo $insLoginController->force_close_session_controller();
+                    exit;
+                }
+
         ?>
         <!-- Main container -->
         <main class="full-box main-container">
