@@ -131,8 +131,8 @@ class userController extends userModel {
         /*== Check Perfil as a record stored in database ==*/
         if ($perfil != "" && $perfil != "Seleccione") {
             $query = mainModel::execute_simple_query("SELECT perfil_id
-                                                    FROM perfil
-                                                    WHERE perfil_nombre = '$perfil'");
+                                                      FROM perfil
+                                                      WHERE perfil_nombre = '$perfil'");
             if ($query->rowCount() != 1 ) {
                 $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
                                                     "¡El perfil seleccionado no se encuentra registrado en el sistema!");
@@ -171,7 +171,7 @@ class userController extends userModel {
             "apellido" => $apellido,
             "telefono" => $telefono,
             "direccion" => $direccion,
-            "pefil" => is_null($perfil_id) ? $perfil_id : (int) $perfil_id,
+            "perfil" => is_null($perfil_id) ? $perfil_id : (int) $perfil_id,
             "email" => $email,
             "usuario" => $usuario,
             "clave" => $clave,
