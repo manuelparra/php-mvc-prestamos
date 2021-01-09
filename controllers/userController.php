@@ -98,7 +98,7 @@ class userController extends userModel {
 
         /*== Check passwords ==*/
         if ($clave1 == $clave2) {
-            if (mainModel::check_data("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8, 100}", $clave1)) {
+            if (mainModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave1)) {
                 $res = $this->message_with_parameters("simple", "error", "La Contraseña no coincide con el formato solicitado.",
                                                       "Formato de Contraseña erróneo");
                 return $res;
