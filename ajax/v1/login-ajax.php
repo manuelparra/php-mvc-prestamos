@@ -17,9 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $ajaxReq = true;
 
 if (true) {
-    /*--- Instance to user controller ---*/
-    require_once "./controllers/loginController.php";
-    $insLogin = new loginController();
+
 } else {
     session_start(['name' => 'SPM',]);
     session_unset();

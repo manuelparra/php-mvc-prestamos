@@ -114,6 +114,23 @@ class mainModel {
         }
     }
 
+    /*--- Function to generate alert message ---*/
+    protected static function message_with_parameters($alert, $type, $title, $text, $url = NULL) {
+        if ($alert == "redirect") {
+            return json_encode([
+                "alert" => $alert,
+                "url" => $url
+            ]);
+        } else {
+            return json_encode([
+                "alert" => $alert,
+                "type" => $type,
+                "title" => $title,
+                "text" => $text
+            ]);
+        }
+    }
+
     /*--- Function to paginate tables ---*/
     protected static function pagination_tables($page, $num_page, $url, $buttons) {
         $html ='

@@ -41,80 +41,80 @@ class userController extends userModel {
             $usuario == "" || $email == "" || $clave1 == "" ||
             $clave2 == "") {
 
-            $res = $this->message_with_parameters("simple", "error", "No has llenado todos los campos requeridos",
-                                                  "Ocurrio un error inersperado");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
+                                                      "No has llenado todos los campos requeridos");
             return $res;
         }
 
         /*==  Check data's ingrity ==*/
         /*== Check DNI ==*/
         if (mainModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
-            $res = $this->message_with_parameters("simple", "error", "El DNI no coincide con el formato solicitado.",
-                                                  "Formato de DNI erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de DNI erróneo",
+                                                      "El DNI no coincide con el formato solicitado.");
             return $res;
         }
 
         /* Check first name */
         if (mainModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
-            $res = $this->message_with_parameters("simple", "error", "El Nombre no coincide con el formato solicitado.",
-                                                  "Formato de Nombre erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Nombre erróneo",
+                                                      "El Nombre no coincide con el formato solicitado.");
             return $res;
         }
 
         /* Check last name */
         if (mainModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
-            $res = $this->message_with_parameters("simple", "error", "El Apellido no coincide con el formato solicitado.",
-                                                  "Formato de Apellido erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Apellido erróneo",
+                                                      "El Apellido no coincide con el formato solicitado.");
             return $res;
         }
 
         /*== Check phone ==*/
         if ($telefono != "" && mainModel::check_data("[0-9()+]{9,20}", $telefono)) {
-            $res = $this->message_with_parameters("simple", "error", "El Teléfono no coincide con el formato solicitado.",
-                                                  "Formato de Teléfono erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Teléfono erróneo",
+                                                      "El Teléfono no coincide con el formato solicitado.");
             return $res;
         }
 
         /*== Check direction ==*/
         if ($direccion != "" && mainModel::check_data("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
-            $res = $this->message_with_parameters("simple", "error", "La Dirección no coincide con el formato solicitado.",
-                                                  "Formato de Dirección erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Dirección erróneo",
+                                                      "La Dirección no coincide con el formato solicitado.");
             return $res;
         }
 
         /*== Check user name ==*/
         if (mainModel::check_data("[a-zA-Z0-9]{1,35}", $usuario)) {
-            $res = $this->message_with_parameters("simple", "error", "El Usuario no coincide con el formato solicitado.",
-                                                  "Formato de Usuario erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Usuario erróneo",
+                                                      "El Usuario no coincide con el formato solicitado.");
             return $res;
         }
 
         /*== Check email ==*/
         if (mainModel::check_data("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", $email)) {
-            $res = $this->message_with_parameters("simple", "error", "El Email no coincide con el formato solicitado.",
-                                                  "Formato de Email erróneo");
+            $res = mainModel::message_with_parameters("simple", "error", "Formato de Email erróneo",
+                                                      "El Email no coincide con el formato solicitado.");
             return $res;
         }
 
         /*== Check passwords ==*/
         if ($clave1 == $clave2) {
             if (mainModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave1)) {
-                $res = $this->message_with_parameters("simple", "error", "La Contraseña no coincide con el formato solicitado.",
-                                                      "Formato de Contraseña erróneo");
+                $res = mainModel::message_with_parameters("simple", "error", "Formato de Contraseña erróneo",
+                                                          "La Contraseña no coincide con el formato solicitado.");
                 return $res;
             } else {
                 $clave = mainModel::encryption($clave1);
             }
         } else {
-            $res = $this->message_with_parameters("simple", "error", "Las Contraseñas deben coincidir",
-                                                  "Contraseñas diferentes");
+            $res = mainModel::message_with_parameters("simple", "error", "Contraseñas diferentes",
+                                                      "Las Contraseñas deben coincidir.");
             return $res;
         }
 
         /*== Check Privilege ==*/
         if ($privilegio < 1 || $privilegio > 3) {
-            $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                  "El Privilegio seleccionado no es valido");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "El Privilegio seleccionado no es valido");
             return $res;
         }
 
@@ -123,8 +123,8 @@ class userController extends userModel {
                                                   FROM usuario
                                                   WHERE usuario_dni = '$dni'");
         if ($query->rowCount() > 0) {
-            $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                  "¡El DNI ya se encuentra registrado en el sistema!");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡El DNI ya se encuentra registrado en el sistema!");
             return $res;
         }
 
@@ -134,8 +134,8 @@ class userController extends userModel {
                                                       FROM perfil
                                                       WHERE perfil_nombre = '$perfil'");
             if ($query->rowCount() != 1 ) {
-                $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                    "¡El perfil seleccionado no se encuentra registrado en el sistema!");
+                $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                          "¡El perfil seleccionado no se encuentra registrado en el sistema!");
                 return $res;
             } else {
                 $row = $query->fetch();
@@ -150,8 +150,8 @@ class userController extends userModel {
                                                   FROM usuario
                                                   WHERE usuario_usuario = '$usuario'");
         if ($query->rowCount() > 0) {
-            $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                  "¡El nombre de usuario ya se encuentra registrado en el sistema!");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡El nombre de usuario ya se encuentra registrado en el sistema!");
             return $res;
         }
 
@@ -160,8 +160,8 @@ class userController extends userModel {
                                                   FROM usuario
                                                   WHERE usuario_email = '$email'");
         if ($query->rowCount() > 0) {
-            $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                  "¡El nombre email ya se encuentra registrado en el sistema!");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡El nombre email ya se encuentra registrado en el sistema!");
             return $res;
         }
 
@@ -182,22 +182,13 @@ class userController extends userModel {
         $query = userModel::add_user_model($data_user_reg);
 
         if ($query->rowCount() == 1) {
-            $res = $this->message_with_parameters("clean", "success", "Usuario registrado",
-                                                  "Los datos del usuario han sido registrado con exito");
+            $res = mainModel::message_with_parameters("clean", "success", "Usuario registrado",
+                                                      "Los datos del usuario han sido registrado con exito.");
             return $res;
         } else {
-            $res = $this->message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                  "No hemos podido registrar el usuario");
+            $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                      "No hemos podido registrar el usuario.");
             return $res;
         }
-    }
-
-    public function message_with_parameters($alert, $type, $title, $text) {
-        return json_encode($alert_config = [
-            "alert" => $alert,
-            "type" => $type,
-            "title" => $title,
-            "text" => $text
-        ]);
     }
 }
