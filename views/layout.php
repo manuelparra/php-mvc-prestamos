@@ -29,26 +29,27 @@ if ( ! defined( 'ABSPATH' ) ) {
     </head>
     <body>
         <?php
-            $ajaxReq = false;
-            require_once "./controllers/viewController.php";
-            $IV = new viewController(); // $IV, instanacia de la vista
 
-            $view = $IV->get_view_controller();
+        $ajaxReq = false;
+        require_once "./controllers/viewController.php";
+        $IV = new viewController(); // $IV, instanacia de la vista
 
-            if ($view == "login" || $view == "404" ) {
-                require_once "./views/contents/" . $view . "-view.php";
-            } else {
-                session_start(['name'=>'SPM']);
+        $view = $IV->get_view_controller();
 
-                require_once "./controllers/loginController.php";
+        if ($view == "login" || $view == "404" ) {
+            require_once "./views/contents/" . $view . "-view.php";
+        } else {
+            session_start(['name'=>'SPM']);
 
-                $insLoginController = new loginController();
+            require_once "./controllers/loginController.php";
 
-                if (!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm'])
-                || !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm'])) {
-                    echo $insLoginController->force_close_session_controller();
-                    exit;
-                }
+            $insLoginController = new loginController();
+
+            if (!isset($_SESSION['token_spm']) || !isset($_SESSION['usuario_spm'])
+            || !isset($_SESSION['privilegio_spm']) || !isset($_SESSION['id_spm'])) {
+                echo $insLoginController->force_close_session_controller();
+                exit;
+            }
 
         ?>
         <!-- Main container -->
@@ -65,7 +66,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             </section>
         </main>
         <?php
-            }
+            include "./views/includes/logout.php";
+        }
         ?>
         <!--=============================================
         =            Include JavaScript files           =

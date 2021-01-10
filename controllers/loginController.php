@@ -132,9 +132,9 @@ class loginController extends loginModel {
         session_start(['name' => 'SPM',]);
 
         $token = mainModel::decryption($_POST['token']);
-        $user = mainModel::decryption($_POST['usuario']);
+        $usuario = mainModel::decryption($_POST['usuario']);
 
-        if ($token == $_SESSION['token_spm'] && $user == $_SESSION['usuario_spm']) {
+        if ($token == $_SESSION['token_spm'] && $usuario == $_SESSION['usuario_spm']) {
             session_unset();
             session_destroy();
             $res = mainModel::message_with_parameters("redirect", NULL, NULL, NULL, SERVER_URL . "login/");
@@ -142,7 +142,7 @@ class loginController extends loginModel {
             $res = mainModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
                                                       "No se puedo cerrar la sesión en el sistema!");
         }
-        echo $res;
+        return $res;
     }
 
 }

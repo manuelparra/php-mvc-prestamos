@@ -184,11 +184,14 @@ class userController extends userModel {
         if ($query->rowCount() == 1) {
             $res = mainModel::message_with_parameters("clean", "success", "Usuario registrado",
                                                       "Los datos del usuario han sido registrado con exito.");
-            return $res;
         } else {
             $res = mainModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
                                                       "No hemos podido registrar el usuario.");
-            return $res;
         }
+        return $res;
+    }
+
+    public function message_user_controller($alert, $type, $title, $text) {
+        return mainModel::message_with_parameters($alert, $type, $title, $text);
     }
 }

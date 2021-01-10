@@ -29,26 +29,6 @@ $(document).ready(function(){
 			PageConten.addClass('active');
 		}
 	});
-
-	/*  Exit system buttom */
-	$('.btn-exit-system').on('click', function(e){
-		e.preventDefault();
-		Swal.fire({
-			title: '¿Deseas cerrar esta sesión?',
-			text: "Estas a punto de cerrar la sesión y salir del sistema.",
-			type: 'question',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sí, salir!',
-			cancelButtonText: 'No, cancelar'
-		}).then((result) => {
-			if (result.value) {
-				window.location="/login/";
-			}
-		});
-	});
-    
 });
 (function($){
     $(window).on("load",function(){

@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $ajaxReq = true;
 
 if (isset($_POST['usuario_dni_reg'])) {
+
     /*--- Instance to user controller ---*/
     require_once "./controllers/userController.php";
     $insUser = new userController();
@@ -34,8 +35,8 @@ if (isset($_POST['usuario_dni_reg'])) {
 
         exit();
     } else {
-        echo $insUser->message_with_parameters("simple", "error", "No has llenado todos los campos requeridos",
-                                              "Ocurrio un error inersperado");
+        echo $insUser->message_user_controller("simple", "error", "Ocurrio un error inesperado",
+                                               "No has llenado todos los campos requeridos");
         exit();
     }
 } else {
