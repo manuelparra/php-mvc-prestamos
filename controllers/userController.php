@@ -288,7 +288,7 @@ class userController extends userModel {
                     </td>
                     <td>
                         <form class="ajax-form"  action="' . SERVER_URL . 'endpoint/user-ajax/" method="POST" data-form="delete" autocomplete="off">
-                            <input type="hidden" name="usuario_id_delete" value="' . userModel::encryption($row['usuario_id']) . '">
+                            <input type="hidden" name="usuario_id_del" value="' . userModel::encryption($row['usuario_id']) . '">
                             <button type="submit" class="btn btn-warning">
                                 <i class="far fa-trash-alt"></i>
                             </button>
@@ -322,21 +322,73 @@ class userController extends userModel {
         </div>
         ';
 
-        $html = $table;
-
-        if ($total >= 1) {
-            $html .= '<p class="text-right">Mostrando usuario(s): ' . $start_record . ' al ' . $end_record . ' de un total de ' . $total . '</p>';
-        }
-
-
         $buttons = 5;
-
         $total_buttons = $nPages >= $buttons ?  $buttons : $nPages;
 
+        $html = $table;
+
         if ( $total >= 1 && $page <= $nPages ) {
+            $html .= '<p class="text-right">Mostrando usuario(s): ' . $start_record . ' al ' . $end_record . ' de un total de ' . $total . '</p>';
+
             $html .= userModel::pagination_tables($page, $nPages, $url, $total_buttons);
         }
 
         return $html;
+    }
+
+    /*--- Controller's function to delete user ---*/
+    public function delete_user_controller() {
+        /* reciving user id */
+        $id = userModel::decryption($_POST['usuario_id_del']);
+        $id = userModel::clean_string($id);
+
+        /* Checking primary user  */
+        if ($id == 1) {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡No podemos eliminar el usuario principal del sistema!");
+            return $res;
+        }
+
+        /* Checking that the user exists in the database */
+        $sql = "SELECT usuario.usuario_id
+                FROM usuario
+                WHERE usuario.usuario_id = '$id'";
+        $query = userModel::execute_simple_query($sql);
+
+        if ( !$query->rowCount() > 0 ) {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡El usuario que intenta eliminar no existe en el sistema!");
+            return $res;
+        }
+
+        /* Checking if the user has associated loan redords */
+        $sql = "SELECT prestamo.usuario_id
+                FROM prestamo
+                WHERE prestamo.usuario_id = '$id'
+                LIMIT 1";
+        $query = userModel::execute_simple_query($sql);
+        if ( $query->rowCount() > 0 ) {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡No podemos eliminar el usuario seleccionado debido a que tiene prestamos asociados, recomendamos deshabilitar el usuario!");
+            return $res;
+        }
+
+        /* Checking privileges of current user */
+        session_start(['name' => 'SPM']);
+        if ($_SESSION['privilegio_spm'] != 1) {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                      "¡No tienes los permisos necesarios para realizar esta operación!");
+            return $res;
+        }
+
+        $query = userModel::delete_user_model($id);
+        if ($query->rowCount() == 1) {
+            $res = userModel::message_with_parameters("reload", "success", "Usuario eliminado",
+                                                      "El usuario ha sido eliminado del sistema exitosamente.");
+        } else {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                      "No hemos podido eliminar el usuario, por favor, intente nuevamente.");
+        }
+        return $res;
     }
 }

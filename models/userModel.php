@@ -51,4 +51,17 @@ class userModel extends mainModel {
 
         return $query;
     }
+
+    /*--- Model's function to delete user ---*/
+    protected static function delete_user_model($id) {
+
+        $sql = "DELETE FROM usuario
+                WHERE usuario.usuario_id = :id";
+        $query = mainModel::connection()->prepare($sql);
+
+        $query->bindParam(":id", $id);
+        $query->execute();
+
+        return $query;
+    }
 }

@@ -23,11 +23,11 @@ if (isset($_POST['token']) && isset($_POST['usuario'])) {
     $insLogin = new loginController();
 
     echo $insLogin->close_session_controller();
-    exit();
+    exit;
 } else {
     session_start(['name' => 'SPM',]);
     session_unset();
     session_destroy();
     header("Location: " . SERVER_URL . "login/");
-    exit();
+    exit;
 }

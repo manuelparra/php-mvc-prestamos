@@ -16,11 +16,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $ajaxReq = true;
 
-if (isset($_POST['usuario_dni_reg'])) {
+if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del'])) {
 
     /*--- Instance to user controller ---*/
     require_once "./controllers/userController.php";
     $insUser = new userController();
+
+    /*--- Delete user ---*/
+    if (isset($_POST['usuario_id_del'])) {
+        echo $insUser->delete_user_controller();
+        exit;
+    }
 
     /*--- Add user ---*/
     if ( (isset($_POST['usuario_dni_reg']) && !empty($_POST['usuario_dni_reg'])) &&
@@ -32,17 +38,16 @@ if (isset($_POST['usuario_dni_reg'])) {
          (isset($_POST['usuario_privilegio_reg']) && !empty($_POST['usuario_privilegio_reg'])) ) {
 
         echo $insUser->add_user_controller();
-
-        exit();
+        exit;
     } else {
         echo $insUser->message_user_controller("simple", "error", "Ocurrio un error inesperado",
                                                "No has llenado todos los campos requeridos");
-        exit();
+        exit;
     }
 } else {
     session_start(['name' => 'SPM',]);
     session_unset();
     session_destroy();
     header("Location: " . SERVER_URL . "login/");
-    exit();
+    exit;
 }
