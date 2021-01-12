@@ -4,7 +4,7 @@
         <i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR USUARIO
     </h3>
     <p class="text-justify">
-        Esta vista permite la modificación de usuarios en el sistema, puede modificar los datos y la configuración del usuario seleccionado.
+        Esta vista permite la modificación de los datos de usuario del sistema, puede modificar los datos y la configuración del usuario.
     </p>
 </div>
 

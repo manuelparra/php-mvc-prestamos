@@ -393,12 +393,13 @@ class userController extends userModel {
     }
 
     /* Controller's function for query data user */
-    public function query_data_user_controller($type, $id) {
+    public function query_data_user_controller($type, $id = NULL) {
         $type = userModel::clean_string($type);
 
-        $id = userModel::decryption($id);
-        $id = userModel::clean_string($id);
-
+        if ( !is_null($id) ) {
+            $id = userModel::decryption($id);
+            $id = userModel::clean_string($id);
+        }
         return userModel::query_data_user_model($type, $id);
     }
 }

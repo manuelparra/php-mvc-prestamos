@@ -4,7 +4,7 @@
         <i class="fab fa-dashcube fa-fw"></i> &nbsp; DASHBOARD
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
+    Sistema para la gestión de prestamos, esta es el panel principal del sistema, en esta vista puede seleccionar cualquiera de las opciones que se muestran a a continuación.
     </p>
 </div>
 
@@ -50,12 +50,19 @@
         </div>
     </a>
 
-    <?php if ($_SESSION['privilegio_spm'] == 1) { ?>
+    <?php
+    if ($_SESSION['privilegio_spm'] == 1) {
+        require_once "./controllers/userController.php";
+
+        $insUserController = new userController();
+
+        $query = $insUserController->query_data_user_controller("Count");
+    ?>
     <a href="<?php echo SERVER_URL; ?>user-list/" class="tile">
         <div class="tile-tittle">Usuarios</div>
         <div class="tile-icon">
             <i class="fas fa-user-secret fa-fw"></i>
-            <p>50 Registrados</p>
+            <p><?php echo $query->rowCount(); ?> Registrados</p>
         </div>
     </a>
     <?php } ?>
