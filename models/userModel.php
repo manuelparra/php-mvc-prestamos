@@ -24,7 +24,7 @@ require_once "./models/mainModel.php";
 
 /*--- Class User Model ---*/
 class userModel extends mainModel {
-    /*--- Model's function to add user ---*/
+    /*--- Function for add user ---*/
     protected static function add_user_model($data) {
 
         $sql = "INSERT INTO usuario (usuario_dni, usuario_nombre, usuario_apellido,
@@ -52,7 +52,7 @@ class userModel extends mainModel {
         return $query;
     }
 
-    /*--- Model's function to delete user ---*/
+    /*--- Function for delete user ---*/
     protected static function delete_user_model($id) {
 
         $sql = "DELETE FROM usuario
@@ -62,6 +62,25 @@ class userModel extends mainModel {
         $query->bindParam(":id", $id);
         $query->execute();
 
+        return $query;
+    }
+
+    /*--- Function for query user data ---*/
+    protected static function query_data_user_model($type, $id) {
+        if ($type == "Unique") {
+            $sql = "SELECT *
+                    FROM usuario
+                    WHERE usuario_id = :id";
+            $query = mainModel::connection()->prepare($sql);
+            $query->bindParam(":id", $id);
+        } elseif ($type == "Count") {
+            $sql = "SELECT usuario_id
+                    FROM usuario
+                    WHERE usuario_id != 1"; // id = 1 is because 1 is the main user id, is the first user registered in the system
+            $query = mainModel::connection()->prepare($sql);
+        }
+
+        $query->execute();
         return $query;
     }
 }

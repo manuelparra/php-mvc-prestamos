@@ -11,7 +11,7 @@ if ($_SESSION['privilegio_spm'] != 1) {
         <i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
+        Esta vista permite registrar nuevos usuarios en el sistema, puede ingresar y configurar todos los datos necesario para darle acceso al sistema a un nuevo usuario.
     </p>
 </div>
 

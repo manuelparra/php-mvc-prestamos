@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class endpointModel {
-    /*--- Get view model ---*/
+    /*--- Function for get ajax requests ---*/
     protected static function get_endpoint_model($file) {
         $whiteListView = ["user-ajax", "login-ajax"];
 

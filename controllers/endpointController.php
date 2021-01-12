@@ -18,7 +18,7 @@ require_once "./models/endpointModel.php";
 
 class endpointController extends endpointModel
 {
-    /*--- Controller to get view ---*/
+    /*--- Controller's function for get ajax requests ---*/
     public function get_endpoint_controller($endpoint) {
         $route = explode("/", $endpoint);
         $path = endpointModel::get_endpoint_model($route[1]);

@@ -4,7 +4,7 @@
         <i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR USUARIO
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
+        Esta vista permite la modificación de usuarios en el sistema, puede modificar los datos y la configuración del usuario seleccionado.
     </p>
 </div>
 

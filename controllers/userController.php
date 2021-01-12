@@ -20,7 +20,7 @@ include_once "./models/userModel.php";
 /*--- Class User Controller ---*/
 class userController extends userModel {
 
-    /*--- Controller's function to add user ---*/
+    /*--- Controller's function for add user ---*/
     public function add_user_controller() {
         $dni = userModel::clean_string($_POST['usuario_dni_reg']);
         $nombre = userModel::clean_string($_POST['usuario_nombre_reg']);
@@ -42,7 +42,7 @@ class userController extends userModel {
             $clave2 == "") {
 
             $res = userModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
-                                                      "No has llenado todos los campos requeridos");
+                                                      "No has llenado todos los campos requeridos.");
             return $res;
         }
 
@@ -114,7 +114,7 @@ class userController extends userModel {
         /*== Check Privilege ==*/
         if ($privilegio < 1 || $privilegio > 3) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
-                                                      "El Privilegio seleccionado no es valido");
+                                                      "!El Privilegio seleccionado no es valido!");
             return $res;
         }
 
@@ -145,7 +145,7 @@ class userController extends userModel {
         } else {
             $perfil_id = NULL;
         }
-        /*==  Check User as unique data ==*/
+        /*==  Check user as unique data ==*/
         $query = userModel::execute_simple_query("SELECT usuario_usuario
                                                   FROM usuario
                                                   WHERE usuario_usuario = '$usuario'");
@@ -155,7 +155,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check EMAIL as unique data ==*/
+        /*==  Check email as unique data ==*/
         $query = userModel::execute_simple_query("SELECT usuario_email
                                                   FROM usuario
                                                   WHERE usuario_email = '$email'");
@@ -191,12 +191,12 @@ class userController extends userModel {
         return $res;
     }
 
-    /*--- Controller's function to sent message user ---*/
+    /*--- Controller's function for sent message user ---*/
     public function message_user_controller($alert, $type, $title, $text) {
         return userModel::message_with_parameters($alert, $type, $title, $text);
     }
 
-    /*--- Controller's function to user pagination ---*/
+    /*--- Controller's function for users pagination ---*/
     public function paginator_user_controller($page, $records, $privilege, $id, $url, $search) {
         $page = userModel::clean_string($page);
         $records = userModel::clean_string($records);
@@ -336,7 +336,7 @@ class userController extends userModel {
         return $html;
     }
 
-    /*--- Controller's function to delete user ---*/
+    /*--- Controller's function for delete user ---*/
     public function delete_user_controller() {
         /* reciving user id */
         $id = userModel::decryption($_POST['usuario_id_del']);
@@ -345,7 +345,7 @@ class userController extends userModel {
         /* Checking primary user  */
         if ($id == 1) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
-                                                      "¡No podemos eliminar el usuario principal del sistema!");
+                                                      "No podemos eliminar el usuario principal del sistema.");
             return $res;
         }
 
@@ -369,7 +369,7 @@ class userController extends userModel {
         $query = userModel::execute_simple_query($sql);
         if ( $query->rowCount() > 0 ) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
-                                                      "¡No podemos eliminar el usuario seleccionado debido a que tiene prestamos asociados, recomendamos deshabilitar el usuario!");
+                                                      "No podemos eliminar el usuario seleccionado debido a que tiene prestamos asociados, recomendamos deshabilitar el usuario.");
             return $res;
         }
 
@@ -390,5 +390,15 @@ class userController extends userModel {
                                                       "No hemos podido eliminar el usuario, por favor, intente nuevamente.");
         }
         return $res;
+    }
+
+    /* Controller's function for query data user */
+    public function query_data_user_controller($type, $id) {
+        $type = userModel::clean_string($type);
+
+        $id = userModel::decryption($id);
+        $id = userModel::clean_string($id);
+
+        return userModel::query_data_user_model($type, $id);
     }
 }

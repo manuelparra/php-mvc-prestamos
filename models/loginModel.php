@@ -18,7 +18,7 @@ require_once "./models/mainModel.php";
 
 /*--- Class Login Model ---*/
 class loginModel extends mainModel {
-    /*-- Login model --*/
+    /*-- Function for user login  --*/
     protected static function login_model($data) {
         $sql = "SELECT  usuario.*, perfil.perfil_nombre
                 FROM usuario LEFT JOIN perfil ON usuario.usuario_perfil_id = perfil.perfil_id

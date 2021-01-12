@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class viewModel {
-    /*--- Get view model ---*/
+    /*--- Function for get view model ---*/
     protected static function get_view_model($view)
     {
         $whiteListView = ["home", "client-list", "client-new", "client-search",

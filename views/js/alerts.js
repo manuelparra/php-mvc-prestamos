@@ -23,13 +23,13 @@ function send_ajaxs_form(e) {
   let alert_text;
 
   if (type === "save") {
-    alert_text = "Los datos quedaran guardados en el sistema";
+    alert_text = "Los datos quedaran guardados en el sistema.";
   } else if (type === "delete") {
-    alert_text = "Los datos serán eliminados completamente del sistema!";
+    alert_text = "Los datos serán eliminados completamente del sistema.";
   } else if (type === "update") {
-    alert_text = "Los datos del sistema serán actualizados";
+    alert_text = "Los datos del sistema serán actualizados.";
   } else if (type === "search") {
-    alert_text = "Se eliminara el termino de búsqueda y tendrá que escribir uno nuevo";
+    alert_text = "Se eliminara el termino de búsqueda y tendrá que escribir uno nuevo.";
   } else if (type === "loans") {
     alert_text = "¿Desea remover los datos seleccionados para prestamos o reservaciones?";
   } else {

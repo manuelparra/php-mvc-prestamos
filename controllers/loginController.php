@@ -18,7 +18,7 @@ include_once "./models/loginModel.php";
 
 /*--- Class Login Controller ---*/
 class loginController extends loginModel {
-    /*-- Login Controller Function */
+    /*-- Controller's function for user login */
     public function login_controller() {
         $usuario = loginModel::clean_string($_POST['usuario_log']);
         $clave = loginModel::clean_string($_POST['clave_log']);
@@ -115,7 +115,7 @@ class loginController extends loginModel {
         }
     }
 
-    /* Forse Close Session Controller */
+    /* Controller's function for forse close session */
     public function force_close_session_controller() {
         session_unset();
         session_destroy();
@@ -127,7 +127,7 @@ class loginController extends loginModel {
         }
     }
 
-    /* Close Session Controller */
+    /* Controller's function for close session */
     public function close_session_controller() {
         session_start(['name' => 'SPM',]);
 
