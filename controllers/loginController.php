@@ -20,8 +20,8 @@ include_once "./models/loginModel.php";
 class loginController extends loginModel {
     /*-- Login Controller Function */
     public function login_controller() {
-        $usuario = mainModel::clean_string($_POST['usuario_log']);
-        $clave = mainModel::clean_string($_POST['clave_log']);
+        $usuario = loginModel::clean_string($_POST['usuario_log']);
+        $clave = loginModel::clean_string($_POST['clave_log']);
 
         /* Check empy fields */
         if ($usuario == "" || $clave == "") {
@@ -42,7 +42,7 @@ class loginController extends loginModel {
 
         /* Check data's integrity */
         /* Check user */
-        if (mainModel::check_data("[a-zA-Z0-9]{1,35}", $usuario)) {
+        if (loginModel::check_data("[a-zA-Z0-9]{1,35}", $usuario)) {
             echo '
             <script>
                 Swal.fire({
@@ -59,7 +59,7 @@ class loginController extends loginModel {
         }
 
         /* Check password */
-        if (mainModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave)) {
+        if (loginModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave)) {
             echo '
             <script>
                 Swal.fire({
@@ -75,7 +75,7 @@ class loginController extends loginModel {
             return;
         }
 
-        $clave_encryted = mainModel::encryption($clave);
+        $clave_encryted = loginModel::encryption($clave);
 
         $data_login = [
             "usuario" => $usuario,
@@ -131,18 +131,21 @@ class loginController extends loginModel {
     public function close_session_controller() {
         session_start(['name' => 'SPM',]);
 
-        $token = mainModel::decryption($_POST['token']);
-        $usuario = mainModel::decryption($_POST['usuario']);
+        $token = loginModel::decryption($_POST['token']);
+        $usuario = loginModel::decryption($_POST['usuario']);
 
         if ($token == $_SESSION['token_spm'] && $usuario == $_SESSION['usuario_spm']) {
             session_unset();
             session_destroy();
-            $res = mainModel::message_with_parameters("redirect", NULL, NULL, NULL, SERVER_URL . "login/");
+            $res = loginModel::message_with_parameters("redirect", NULL, NULL, NULL, SERVER_URL . "login/");
         } else {
-            $res = mainModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
-                                                      "No se puedo cerrar la sesión en el sistema!");
+            $res = loginModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
+                                                       "No se puedo cerrar la sesión en el sistema!");
         }
         return $res;
     }
 
+    public function encrypt_data($string) {
+        return loginModel::encryption($string);
+    }
 }

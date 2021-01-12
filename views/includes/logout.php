@@ -15,8 +15,8 @@
 		}).then((result) => {
 			if (result.value) {
                 let url = '<?php echo SERVER_URL . 'endpoint/login-ajax/'; ?>';
-                let token = '<?php echo $insLoginController->encryption($_SESSION['token_spm']); ?>';
-                let usuario = '<?php echo $insLoginController->encryption($_SESSION['usuario_spm']); ?>';
+                let token = '<?php echo $insLoginController->encrypt_data($_SESSION['token_spm']); ?>';
+                let usuario = '<?php echo $insLoginController->encrypt_data($_SESSION['usuario_spm']); ?>';
 
                 let data = new FormData();
                 data.append("token", token);

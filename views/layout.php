@@ -41,6 +41,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         } else {
             session_start(['name'=>'SPM']);
 
+            $current_page = explode("/", $_GET['view']);
+
             require_once "./controllers/loginController.php";
 
             $insLoginController = new loginController();

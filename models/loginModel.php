@@ -25,6 +25,7 @@ class loginModel extends mainModel {
                 WHERE usuario.usuario_usuario = :usuario
                 AND usuario.usuario_clave = :clave
                 AND usuario.usuario_estado = 'Activa'";
+
         $query = mainModel::connection()->prepare($sql);
         $query->bindParam(":usuario", $data['usuario']);
         $query->bindParam(":clave", $data['clave']);

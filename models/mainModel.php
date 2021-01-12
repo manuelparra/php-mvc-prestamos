@@ -37,7 +37,7 @@ class mainModel {
     }
 
     /*--- Function to encrytion string ---*/
-    public static function encryption($string){
+    protected static function encryption($string){
         $output=FALSE;
         $key=hash('sha256', SECRET_KEY);
         $iv=substr(hash('sha256', SECRET_IV), 0, 16);
@@ -133,6 +133,16 @@ class mainModel {
 
     /*--- Function to paginate tables ---*/
     protected static function pagination_tables($page, $num_page, $url, $buttons) {
+        $pre_pos_mid_button = ($buttons - 1) / 2;
+
+        if ($page == 1 || $page <= $pre_pos_mid_button) {
+            $start = 1;
+        } elseif  ($page >= ($num_page - $pre_pos_mid_button)) {
+            $start = $num_page - ($buttons - 1);
+        } else {
+            $start = $page - $pre_pos_mid_button;
+        }
+
         $html ='
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -154,37 +164,57 @@ class mainModel {
         } else {
             $html .= '
             <li class="page-item">
-                <a class="page-link href="' . $url . '1/">
+                <a class="page-link" href="' . $url . '1/">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link href="' . $url . ($page - 1) . '/">
+                <a class="page-link" href="' . $url . ($page - 1) . '/">
                     <i class="fas fa-angle-left"></i>
                 </a>
             </li>
             ';
         }
 
-        for ($i = $page, $ci = 0; $i <= $num_page; $i++, $ci++) {
-            if ($ci >= $buttons)
-                break;
+        if ($page == 1) {
+            for ($i = 1, $ci = 0; $i <= $num_page; $i++, $ci++) {
+                if ($ci >= $buttons)
+                    break;
 
-            if ($page == $i) {
-                $html .= '
-                <li class="page-item">
-                    <a class="page-link active" href="' . $url . $i . '/">' . $i . '</a>
-                </li>
-                ';
-            } else {
-                $html .= '
-                <li class="page-item">
-                    <a class="page-link" href="' . $url . $i . '/">' . $i . '</a>
-                </li>
-                ';
+                if ($page == $i) {
+                    $html .= '
+                    <li class="page-item">
+                        <a class="page-link active" href="' . $url . $i . '/">' . $i . '</a>
+                    </li>
+                    ';
+                } else {
+                    $html .= '
+                    <li class="page-item">
+                        <a class="page-link" href="' . $url . $i . '/">' . $i . '</a>
+                    </li>
+                    ';
+                }
+            }
+        } else {
+
+            for ($i = $start, $ci = 0; $i <= $num_page; $i++, $ci++) {
+                if ($ci >= $buttons)
+                    break;
+                if ($page == $i) {
+                    $html .= '
+                    <li class="page-item">
+                        <a class="page-link active" href="' . $url . $i . '/">' . $i . '</a>
+                    </li>
+                    ';
+                } else {
+                    $html .= '
+                    <li class="page-item">
+                        <a class="page-link" href="' . $url . $i . '/">' . $i . '</a>
+                    </li>
+                    ';
+                }
             }
         }
-
         if ($page == $num_page) {
             $html .= '
             <li class="page-item disabled">
@@ -201,12 +231,12 @@ class mainModel {
         } else {
             $html .= '
             <li class="page-item">
-                <a class="page-link href="' . $url . ($page + 1) . '/">
+                <a class="page-link" href="' . $url . ($page + 1) . '/">
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link href="' . $url . $num_page . '/">
+                <a class="page-link" href="' . $url . $num_page . '/">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>

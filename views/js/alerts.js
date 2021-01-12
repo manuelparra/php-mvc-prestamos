@@ -25,7 +25,7 @@ function send_ajaxs_form(e) {
   if (type === "save") {
     alert_text = "Los datos quedaran guardados en el sistema";
   } else if (type === "delete") {
-    alert_text = "Los datos serán eliminados completamente del sistema";
+    alert_text = "Los datos serán eliminados completamente del sistema!";
   } else if (type === "update") {
     alert_text = "Los datos del sistema serán actualizados";
   } else if (type === "search") {
@@ -38,7 +38,7 @@ function send_ajaxs_form(e) {
 
   Swal.fire({
     icon: 'question',
-    title: 'Confirmación',
+    title: '¿Estás seguro?',
     text: alert_text,
     showCancelButton: true,
     confirmButtonColor: '#3085d6',

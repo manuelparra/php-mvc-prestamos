@@ -14,11 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ($ajaxReq) {
-    require_once "./models/mainModel.php";
-} else {
-    require_once "./mainModel.php";
-}
+require_once "./models/mainModel.php";
+
+//if ($ajaxReq) {
+//    require_once "./models/mainModel.php";
+//} else {
+//    require_once "./mainModel.php";
+//}
 
 /*--- Class User Model ---*/
 class userModel extends mainModel {
