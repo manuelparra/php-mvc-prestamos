@@ -1,3 +1,10 @@
+<?php
+if ($_SESSION['privilegio_spm'] != 1) {
+    echo $insLoginController->force_close_session_controller();
+    exit;
+}
+?>
+
 <!-- Page header -->
 <div class="full-box page-header">
     <h3 class="text-left">

@@ -68,8 +68,10 @@ class userModel extends mainModel {
     /*--- Function for query user data ---*/
     protected static function query_data_user_model($type, $id) {
         if ($type == "Unique") {
-            $sql = "SELECT *
-                    FROM usuario
+            $sql = "SELECT usuario.*, perfil.perfil_nombre
+                    FROM prestamos.usuario
+                    LEFT JOIN prestamos.perfil
+                    ON usuario.usuario_perfil_id = perfil.perfil_id
                     WHERE usuario_id = :id";
             $query = mainModel::connection()->prepare($sql);
             $query->bindParam(":id", $id);
@@ -80,6 +82,15 @@ class userModel extends mainModel {
             $query = mainModel::connection()->prepare($sql);
         }
 
+        $query->execute();
+        return $query;
+    }
+
+    protected static function perfil_list_user_model() {
+        $sql = "SELECT perfil_id, perfil_nombre
+                FROM perfil
+                ORDER BY perfil_nombre DESC";
+        $query = mainModel::connection()->prepare($sql);
         $query->execute();
         return $query;
     }

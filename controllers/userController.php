@@ -402,4 +402,8 @@ class userController extends userModel {
         }
         return userModel::query_data_user_model($type, $id);
     }
+
+    public function query_perfil_list_user_model() {
+        return userModel::perfil_list_user_model();
+    }
 }

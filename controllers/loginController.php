@@ -140,11 +140,12 @@ class loginController extends loginModel {
             $res = loginModel::message_with_parameters("redirect", NULL, NULL, NULL, SERVER_URL . "login/");
         } else {
             $res = loginModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
-                                                       "No se puedo cerrar la sesión en el sistema!");
+                                                       "¡No se puedo cerrar la sesión en el sistema!");
         }
         return $res;
     }
 
+    /* Controller's function for encryp data */
     public function encrypt_data($string) {
         return loginModel::encryption($string);
     }

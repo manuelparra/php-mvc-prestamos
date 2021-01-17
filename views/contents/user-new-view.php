@@ -31,6 +31,19 @@ if ($_SESSION['privilegio_spm'] != 1) {
 
 <!-- Content -->
 <div class="container-fluid">
+    <?php
+    require_once "./controllers/userController.php";
+    $insUserController = new userController();
+
+
+    $profiles = NULL;
+
+    $query = $insUserController->query_perfil_list_user_model();
+    if ( $query->rowCount() > 0 ) {
+        $profiles = $query->fetchAll();
+    }
+    ?>
+
     <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/user-ajax/" method="POST" data-form="save" autocomplete="off">
         <fieldset>
             <legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
@@ -71,7 +84,13 @@ if ($_SESSION['privilegio_spm'] != 1) {
                         <div class="form-group bmd-form-group">
                             <select class="form-control" name="usuario_perfil_reg" id="usuario_perfil">
                                 <option value="Seleccione" selected="" disabled="">Seleccione un perfil</option>
-                                <option value="Web Developer">Web Developer</option>
+                                <?php
+                                if ( !is_null($profiles) ) {
+                                    foreach($profiles as $profile) {
+                                        echo '<option value="' . $profile['perfil_id'] . '">' . $profile['perfil_nombre'] . '</option>';
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
