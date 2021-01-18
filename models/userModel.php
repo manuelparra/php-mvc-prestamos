@@ -86,12 +86,43 @@ class userModel extends mainModel {
         return $query;
     }
 
+    /*--- Function for query profile list ---*/
     protected static function perfil_list_user_model() {
         $sql = "SELECT perfil_id, perfil_nombre
                 FROM perfil
                 ORDER BY perfil_nombre DESC";
         $query = mainModel::connection()->prepare($sql);
         $query->execute();
+        return $query;
+    }
+
+    /*--- Function update user data model ---*/
+    protected static function update_user_data_model($data) {
+        $sql = "UPDATE usuario SET  usuario.usuario_dni = :dni, usuario.usuario_nombre = :nombre,
+                usuario.usuario_apellido = :apellido, usuario.usuario_telefono = :telefono,
+                usuario.usuario_direccion = :direccion, usuario.usuario_email = :email,
+                usuario.usuario_usuario = :usuario, usuario.usuario_clave = :clave,
+                usuario.usuario_estado = :estado, usuario.usuario_privilegio = :privilegio,
+                usuario.usuario_perfil_id = :perfil_id
+                WHERE usuario.usuario_id = :id ";
+
+        $query = mainModel::connection()->prepare($sql);
+
+        $query->bindParam(":dni", $data['dni']);
+        $query->bindParam(":nombre", $data['nombre']);
+        $query->bindParam(":apellido", $data['apellido']);
+        $query->bindParam(":telefono", $data['telefono']);
+        $query->bindParam(":direccion", $data['direccion']);
+        $query->bindParam(":email", $data['email']);
+        $query->bindParam(":usuario", $data['usuario']);
+        $query->bindParam(":clave", $data['clave']);
+        $query->bindParam(":estado", $data['estado']);
+        $query->bindParam(":privilegio", $data['privilegio']);
+        $query->bindParam(":perfil_id", $data['perfil_id']);
+        $query->bindParam(":id", $data['id']);
+
+        $query->execute();
+
         return $query;
     }
 }

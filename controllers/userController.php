@@ -392,7 +392,7 @@ class userController extends userModel {
         return $res;
     }
 
-    /* Controller's function for query data user */
+    /*--- Controller's function for query data user ---*/
     public function query_data_user_controller($type, $id = NULL) {
         $type = userModel::clean_string($type);
 
@@ -403,7 +403,71 @@ class userController extends userModel {
         return userModel::query_data_user_model($type, $id);
     }
 
+    /*--- Controller's function for query perfil list user ---*/
     public function query_perfil_list_user_model() {
         return userModel::perfil_list_user_model();
+    }
+
+    /*--- Controller's function update user data ---*/
+    public function update_user_data_controller() {
+        /* Receiving the id  */
+        $id = userModel::decryption($_POST['usuario_id_upd']);
+        $id = userModel::clean_string($id);
+
+        /* Checking user id in the database */
+        $sql = "SELECT usuario.*
+                FROM usuario
+                WHERE usuario.usuario_id = '$id'";
+        $query = userModel::execute_simple_query($sql);
+
+        if ( $query->rowCount() == 1 ) {
+            $fields = $query->fetch();
+        } else {
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                      "El usuario no existe en base de datos, intente nuevamente.");
+            return $res;
+        }
+
+        $dni = userModel::clean_string($_POST['usuario_dni_upd']);
+        $nombre = userModel::clean_string($_POST['usuario_nombre_upd']);
+        $apellido = userModel::clean_string($_POST['usuario_apellido_upd']);
+        $telefono = userModel::clean_string($_POST['usuario_telefono_upd']);
+        $direccion = userModel::clean_string($_POST['usuario_direccion_upd']);
+        $perfil_id = userModel::clean_string($_POST['usuario_perfil_upd']);
+
+        $usuario = userModel::clean_string($_POST['usuario_usuario_upd']);
+        $email = userModel::clean_string($_POST['usuario_email_upd']);
+
+        $estado = isset($_POST['usuario_estado_upd']) ? userModel::clean_string($_POST['usuario_estado_upd']) : $fields['usuario_estado'];
+
+        $clave1 = userModel::clean_string($_POST['usuario_clave_nueva_1_upd']);
+        $clave2 = userModel::clean_string($_POST['usuario_clave_nueva_2_upd']);
+
+        $privilegio = isset($_POST['usuario_privilegio_upd']) ? userModel::clean_string($_POST['usuario_privilegio_upd']) : $fields['usuario_privilegio'];
+
+        $admin_usuario = userModel::clean_string($_POST['usuario_admin']);
+        $admin_clave = userModel::clean_string($_POST['clave_admin']);
+        $admin_clave = userModel::encryption($admin_clave);
+
+        $account_type = userModel::clean_string($_POST['account_type']);
+
+        /*== Check empty fields ==*/
+        if ( $dni == "" || $nombre == "" || $apellido == "" ||
+             $usuario == "" || $email == "" || $admin_usuario = "" ||
+             $admin_clave = "" ) {
+
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
+                                                      "No has llenado todos los campos requeridos.");
+            return $res;
+        }
+
+        $data = [
+            "dni" => $dni,
+            "nombre" => $nombre,
+            "apellido" => $apellido,
+            "telefono" => $telefono,
+            "direccion" => $direccion,
+            "perfil" => $perfil_id
+        ];
     }
 }

@@ -16,14 +16,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $ajaxReq = true;
 
-if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del'])) {
+if ( isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset($_POST['usuario_id_upd']) ) {
 
     /*--- Instance to user controller ---*/
     require_once "./controllers/userController.php";
     $insUser = new userController();
 
+    /* Update user */
+    if ( isset($_POST['usuario_id_upd']) ) {
+        echo $insUser->update_user_data_controller();
+        exit;
+    }
+
     /*--- Delete user ---*/
-    if (isset($_POST['usuario_id_del'])) {
+    if ( isset($_POST['usuario_id_del']) ) {
         echo $insUser->delete_user_controller();
         exit;
     }
