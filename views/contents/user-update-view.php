@@ -164,13 +164,13 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="usuario_clave_nueva_1" class="bmd-label-floating">Contraseña</label>
-                            <input type="password" class="form-control" name="usuario_clave_nueva_1_upd" id="usuario_clave_nueva_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
+                            <input type="password" class="form-control" name="usuario_clave_nueva_1_upd" id="usuario_clave_nueva_1" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$" maxlength="100" >
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="usuario_clave_nueva_2" class="bmd-label-floating">Repetir contraseña</label>
-                            <input type="password" class="form-control" name="usuario_clave_nueva_2_upd" id="usuario_clave_nueva_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
+                            <input type="password" class="form-control" name="usuario_clave_nueva_2_upd" id="usuario_clave_nueva_2" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$" maxlength="100" >
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="clave_admin" class="bmd-label-floating">Contraseña</label>
-                            <input type="password" class="form-control" name="clave_admin" id="clave_admin" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required="" >
+                            <input type="password" class="form-control" name="clave_admin" id="clave_admin" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$" maxlength="100" required="" >
                         </div>
                     </div>
                 </div>
