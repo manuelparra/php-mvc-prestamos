@@ -137,7 +137,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                     <?php if ($_SESSION['privilegio_spm'] == 1 && $fields['usuario_id'] != 1 ) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
                     <div class="col-12">
                         <div class="form-group">
-                            <span>Estado de la cuenta  &nbsp; <?php echo ($fields['usuario_estado'] == "Activa") ? '<span class="badge badge-info">Activa</span>' : '<span class="badge badge-danger">Deshabilitado</span>'; ?></span>
+                            <span>Estado de la cuenta  &nbsp; <?php echo ($fields['usuario_estado'] == "Activa") ? '<span class="badge badge-info">Activa</span>' : '<span class="badge badge-danger">Deshabilitada</span>'; ?></span>
                             <select class="form-control" name="usuario_estado_upd">
                                 <?php
                                 if ( $fields['usuario_estado'] == "Activa" ) {

@@ -87,6 +87,22 @@ class loginController extends loginModel {
         if ($query->rowCount() == 1) {
             $row = $query->fetch();
 
+            if ( $row['usuario_estado'] == "Deshabilitada" ) {
+                echo '
+                <script>
+                    Swal.fire({
+                        title: "Cuenta Deshabilitada",
+                        text: "La cuenta de usuario se encuentra deshabilitada, por favor, contacte con sus administrador de sistemas.",
+                        type: "error",
+                        icon: "error",
+                        confirmButtonText: "Aceptar"
+                    });
+                </script>
+                ';
+
+                return;
+            }
+
             session_start(['name'=>'SPM']);
 
             $_SESSION['id_spm'] = $row['usuario_id'];

@@ -23,8 +23,7 @@ class loginModel extends mainModel {
         $sql = "SELECT  usuario.*, perfil.perfil_nombre
                 FROM usuario LEFT JOIN perfil ON usuario.usuario_perfil_id = perfil.perfil_id
                 WHERE usuario.usuario_usuario = :usuario
-                AND usuario.usuario_clave = :clave
-                AND usuario.usuario_estado = 'Activa'";
+                AND usuario.usuario_clave = :clave";
 
         $query = mainModel::connection()->prepare($sql);
         $query->bindParam(":usuario", $data['usuario']);
