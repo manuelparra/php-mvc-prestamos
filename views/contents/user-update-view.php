@@ -1,5 +1,15 @@
 <?php
-if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1] ) {
+/**
+ * Contents of User Data Update view.
+ *
+ * Contents of the User Data Update page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+
+if ($_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1]) {
     echo $insLoginController->force_close_session_controller();
     exit;
 }
@@ -39,7 +49,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
 
     $query = $insUserController->query_data_user_controller('Unique', $current_page[1]);
 
-    if ( $query->rowCount() == 1 ) {
+    if ($query->rowCount() == 1) {
         $fields = $query->fetch();
     ?>
 
@@ -86,7 +96,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                         </div>
                     </div>
 
-                    <?php if ( $_SESSION['privilegio_spm'] == 1 ) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
+                    <?php if ($_SESSION['privilegio_spm'] == 1) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
                     <div class="col-12">
                         <div class="form-group bmd-form-group">
                             <select class="form-control" name="usuario_perfil_upd" id="usuario_perfil">
@@ -99,13 +109,13 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                                 $profiles = NULL;
 
                                 $query = $insUserController->query_perfil_list_user_model();
-                                if ( $query->rowCount() > 0 ) {
+                                if ($query->rowCount() > 0) {
                                     $profiles = $query->fetchAll();
                                 }
 
-                                if ( !is_null($profiles) ) {
+                                if (!is_null($profiles)) {
                                     foreach($profiles as $profile) {
-                                        if ( $fields['usuario_perfil_id'] != $profile['perfil_id'] ) {
+                                        if ($fields['usuario_perfil_id'] != $profile['perfil_id']) {
                                             echo '<option value="' . $profile['perfil_id'] . '">' . $profile['perfil_nombre'] . '</option>';
                                         }
                                     }
@@ -137,13 +147,13 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                             id="usuario_email" maxlength="70" value="<?php echo $fields['usuario_email']; ?>">
                         </div>
                     </div>
-                    <?php if ($_SESSION['privilegio_spm'] == 1 && $fields['usuario_id'] != 1 ) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
+                    <?php if ($_SESSION['privilegio_spm'] == 1 && $fields['usuario_id'] != 1) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
                     <div class="col-12">
                         <div class="form-group">
                             <span>Estado de la cuenta  &nbsp; <?php echo ($fields['usuario_estado'] == "Activa") ? '<span class="badge badge-info">Activa</span>' : '<span class="badge badge-danger">Deshabilitada</span>'; ?></span>
                             <select class="form-control" name="usuario_estado_upd">
                                 <?php
-                                if ( $fields['usuario_estado'] == "Activa" ) {
+                                if ($fields['usuario_estado'] == "Activa") {
                                     echo '<option value="Activa" selected="">Activa</option>';
                                     echo '<option value="Deshabilitada">Deshabilitada</option>';
                                 } else {
@@ -180,7 +190,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
             </div>
         </fieldset>
 
-        <?php if ($_SESSION['privilegio_spm'] == 1 && $fields['usuario_id'] != 1 ) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
+        <?php if ($_SESSION['privilegio_spm'] == 1 && $fields['usuario_id'] != 1) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
         <br><br><br>
         <fieldset>
             <legend><i class="fas fa-medal"></i> &nbsp; Nivel de privilegio</legend>
@@ -193,9 +203,9 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                         <div class="form-group">
                             <select class="form-control" name="usuario_privilegio_upd">
                                 <option value="" <?php echo (is_null($fields['usuario_privilegio'])) ? 'selected=""' : ''; ?> disabled="">Seleccione una opción</option>
-                                <option value="1" <?php if ( $fields['usuario_privilegio'] == 1 ) { echo 'selected=""'; } ?>>Control total <?php if ( $fields['usuario_privilegio'] == 1 ) { echo '(Actual)'; } ?></option>
-                                <option value="2" <?php if ( $fields['usuario_privilegio'] == 2 ) { echo 'selected=""'; } ?>>Edición <?php if ( $fields['usuario_privilegio'] == 2 ) { echo '(Actual)'; } ?></option>
-                                <option value="3" <?php if ( $fields['usuario_privilegio'] == 3 ) { echo 'selected=""'; } ?>>Registrar <?php if ( $fields['usuario_privilegio'] == 3 ) { echo '(Actual)'; } ?></option>
+                                <option value="1" <?php if ($fields['usuario_privilegio'] == 1) { echo 'selected=""'; } ?>>Control total <?php if ($fields['usuario_privilegio'] == 1) { echo '(Actual)'; } ?></option>
+                                <option value="2" <?php if ($fields['usuario_privilegio'] == 2) { echo 'selected=""'; } ?>>Edición <?php if ($fields['usuario_privilegio'] == 2) { echo '(Actual)'; } ?></option>
+                                <option value="3" <?php if ($fields['usuario_privilegio'] == 3) { echo 'selected=""'; } ?>>Registrar <?php if ($fields['usuario_privilegio'] == 3) { echo '(Actual)'; } ?></option>
                             </select>
                         </div>
                     </div>
@@ -224,7 +234,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                 </div>
             </div>
         </fieldset>
-        <?php if ( $insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1] ) { ?>
+        <?php if ($insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1]) { ?>
         <input type="hidden" name="account_type" value="Impropia">
         <?php } else { ?>
         <input type="hidden" name="account_type" value="Propia">

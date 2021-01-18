@@ -1,4 +1,14 @@
 <?php
+/**
+ * Contents of User Search view.
+ *
+ * Contents of the User Search page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+
 if ($_SESSION['privilegio_spm'] != 1) {
     echo $insLoginController->force_close_session_controller();
     exit;

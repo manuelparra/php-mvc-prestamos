@@ -16,6 +16,31 @@ $(document).ready(function(){
 		}
 	});
 
+	/* Reset Forms */
+	//const reset_button = document.getElementById('button_reset');
+	$('#button_reset').on('click', function(e) {
+		e.preventDefault();
+
+		Swal.fire({
+			title: '¿Deseas borrar los datos del formulario?',
+			text: "Estas a punto de limpiar todos los datos del formulario.",
+			icon: "question",
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, limpiar!',
+			cancelButtonText: 'No, cancelar'
+		}).then((result) => {
+			if (result.value) {
+				$('#new_registration_form').trigger("reset");;
+			}
+		});
+	});
+	//reset_button.addEventListener('click', (e) => {
+
+
+	//});
+
 	/*  Show/Hidden Nav Lateral */
 	$('.show-nav-lateral').on('click', function(e){
 		e.preventDefault();

@@ -1,7 +1,16 @@
 <?php
+/**
+ * Index File
+ *
+ * Contents of the Index File.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
 
 /*--- ABS Path of the proyect. ---*/
-if ( !defined('ABSPATH') )
+if (!defined('ABSPATH'))
     define('ABSPATH', dirname(__FILE__) . '/');
 
 require_once "./config/app.php";

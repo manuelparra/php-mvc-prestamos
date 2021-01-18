@@ -9,7 +9,7 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     echo "Acceso no autorizado.";
 	exit; // Exit if accessed directly
 }
@@ -87,7 +87,7 @@ class loginController extends loginModel {
         if ($query->rowCount() == 1) {
             $row = $query->fetch();
 
-            if ( $row['usuario_estado'] == "Deshabilitada" ) {
+            if ($row['usuario_estado'] == "Deshabilitada") {
                 echo '
                 <script>
                     Swal.fire({

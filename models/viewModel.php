@@ -9,7 +9,7 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     echo "Acceso no autorizado.";
 	exit; // Exit if accessed directly
 }
@@ -19,10 +19,10 @@ class viewModel {
     protected static function get_view_model($view)
     {
         $whiteListView = ["home", "client-list", "client-new", "client-search",
-            "client-update", "company", "item-list", "item-new", "item-search",
-            "item-update", "reservation-list", "reservation-new", "reservation-pending",
-            "reservation-reservation", "reservation-search", "reservation-update",
-            "user-list", "user-new", "user-search", "user-update"];
+        "client-update", "company", "item-list", "item-new", "item-search",
+        "item-update", "reservation-list", "reservation-new", "reservation-pending",
+        "reservation-reservation", "reservation-search", "reservation-update",
+        "user-list", "user-new", "user-search", "user-update"];
 
         $content = "404";
 

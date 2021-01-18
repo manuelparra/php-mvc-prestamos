@@ -1,19 +1,18 @@
 <?php
 /**
- * 404 View Contents
+ * Contents of 404 view.
  *
- * All functionality pertaining to 404 View Contents.
+ * Contents of the 404 page view.
  *
- * @package Controller
+ * @package View
  * @author Manuel Parra
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     header("Location: /login/");
 	exit; // Exit if accessed directly
 }
-
 ?>
 
 <div class="full-box container-404">

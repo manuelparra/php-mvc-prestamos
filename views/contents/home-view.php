@@ -1,3 +1,15 @@
+<?php
+/**
+ * Contents of Home view.
+ *
+ * Contents of the Home page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+?>
+
 <!-- Page header -->
 <div class="full-box page-header">
     <h3 class="text-left">

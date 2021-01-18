@@ -1,15 +1,15 @@
 <?php
 /**
- * View Model Class
+ * Layout Template view
  *
- * All functionality pertaining to the View Model.
+ * Contents of the Layout Template view.
  *
- * @package Model
+ * @package View
  * @author Manuel Parra
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     echo "Acceso no autorizado.";
 	exit; // Exit if accessed directly
 }
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         $view = $IV->get_view_controller();
 
-        if ($view == "login" || $view == "404" ) {
+        if ($view == "login" || $view == "404") {
             require_once "./views/contents/" . $view . "-view.php";
         } else {
             session_start(['name'=>'SPM']);

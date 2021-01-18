@@ -30,7 +30,6 @@
 				    return res.json()
                 })
                 .then(res => {
-                    console.log(res);
                     return ajax_alerts(res);
                 });
             }

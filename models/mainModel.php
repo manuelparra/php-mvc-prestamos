@@ -9,7 +9,7 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     echo "Acceso no autorizado.";
 	exit; // Exit if accessed directly
 }
@@ -196,7 +196,6 @@ class mainModel {
                 }
             }
         } else {
-
             for ($i = $start, $ci = 0; $i <= $num_page; $i++, $ci++) {
                 if ($ci >= $buttons)
                     break;
@@ -215,6 +214,7 @@ class mainModel {
                 }
             }
         }
+
         if ($page == $num_page) {
             $html .= '
             <li class="page-item disabled">

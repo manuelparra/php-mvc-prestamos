@@ -1,9 +1,19 @@
 <?php
-    if (isset($_POST['usuario_log']) && isset($_POST['clave_log'])) {
-        require_once "./controllers/loginController.php";
-        $insLogin = new loginController();
-        echo $insLogin->login_controller();
-    }
+/**
+ * Contents of User's Login view.
+ *
+ * Contents of the User Login page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+
+if (isset($_POST['usuario_log']) && isset($_POST['clave_log'])) {
+    require_once "./controllers/loginController.php";
+    $insLogin = new loginController();
+    echo $insLogin->login_controller();
+}
 ?>
 
 <div class="login-container">

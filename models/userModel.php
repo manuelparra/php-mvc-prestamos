@@ -9,18 +9,12 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined( 'ABSPATH')) {
     echo "Acceso no autorizado.";
 	exit; // Exit if accessed directly
 }
 
 require_once "./models/mainModel.php";
-
-//if ($ajaxReq) {
-//    require_once "./models/mainModel.php";
-//} else {
-//    require_once "./mainModel.php";
-//}
 
 /*--- Class User Model ---*/
 class userModel extends mainModel {

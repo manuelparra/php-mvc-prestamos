@@ -1,4 +1,14 @@
 <?php
+/**
+ * Contents of New User view.
+ *
+ * Contents of the New User page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+
 if ($_SESSION['privilegio_spm'] != 1) {
     echo $insLoginController->force_close_session_controller();
     exit;
@@ -35,16 +45,16 @@ if ($_SESSION['privilegio_spm'] != 1) {
     require_once "./controllers/userController.php";
     $insUserController = new userController();
 
-
     $profiles = NULL;
 
     $query = $insUserController->query_perfil_list_user_model();
-    if ( $query->rowCount() > 0 ) {
+    if ($query->rowCount() > 0) {
         $profiles = $query->fetchAll();
     }
     ?>
 
-    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/user-ajax/" method="POST" data-form="save" autocomplete="off">
+    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/user-ajax/" method="POST"
+    id="new_registration_form" data-form="save" autocomplete="off">
         <fieldset>
             <legend><i class="far fa-address-card"></i> &nbsp; Información personal</legend>
             <div class="container-fluid">
@@ -85,7 +95,7 @@ if ($_SESSION['privilegio_spm'] != 1) {
                             <select class="form-control" name="usuario_perfil_reg" id="usuario_perfil">
                                 <option value="Seleccione" selected="" disabled="">Seleccione un perfil</option>
                                 <?php
-                                if ( !is_null($profiles) ) {
+                                if (!is_null($profiles)) {
                                     foreach($profiles as $profile) {
                                         echo '<option value="' . $profile['perfil_id'] . '">' . $profile['perfil_nombre'] . '</option>';
                                     }
@@ -153,7 +163,7 @@ if ($_SESSION['privilegio_spm'] != 1) {
             </div>
         </fieldset>
         <p class="text-center" style="margin-top: 40px;">
-            <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
+            <button type="button" class="btn btn-raised btn-secondary btn-sm" id="button_reset"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
             &nbsp; &nbsp;
             <button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
         </p>
