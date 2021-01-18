@@ -85,6 +85,8 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                             id="usuario_direccion" maxlength="190" value="<?php echo $fields['usuario_direccion']; ?>">
                         </div>
                     </div>
+
+                    <?php if ( $_SESSION['privilegio_spm'] == 1 ) { ?> <!-- Show the fallowing options if user privilege is iqual to 1 (admin) -->
                     <div class="col-12">
                         <div class="form-group bmd-form-group">
                             <select class="form-control" name="usuario_perfil_upd" id="usuario_perfil">
@@ -112,6 +114,7 @@ if ( $_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SES
                             </select>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </fieldset>

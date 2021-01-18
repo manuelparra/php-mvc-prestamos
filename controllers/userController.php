@@ -499,7 +499,7 @@ class userController extends userModel {
         }
 
         /*== Check Perfil as a record stored in database ==*/
-        $perfil_id = NULL;
+        $perfil_id = !is_null($fields['usuario_perfil_id']) ? (int) $fields['usuario_perfil_id'] : NULL;
 
         if ( $perfil != "" && $perfil != "Seleccione" ) {
             $query = userModel::execute_simple_query("SELECT perfil_id
