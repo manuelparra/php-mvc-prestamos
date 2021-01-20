@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 class endpointModel {
     /*--- Function for get ajax requests ---*/
     protected static function get_endpoint_model($file) {
-        $whiteListView = ["user-ajax", "login-ajax"];
+        $whiteListView = ["user-ajax", "login-ajax", "search-engine-ajax"];
 
         $req = "./ajax/v1/error.php";
 

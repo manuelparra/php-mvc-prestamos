@@ -40,7 +40,7 @@ class userController extends userModel {
             $usuario == "" || $email == "" || $clave1 == "" ||
             $clave2 == "") {
 
-            $res = userModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
                                                       "No has llenado todos los campos requeridos.");
             return $res;
         }
@@ -456,7 +456,7 @@ class userController extends userModel {
             $usuario == "" || $email == "" || $admin_usuario == "" ||
             $admin_clave == "") {
 
-            $res = userModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
+            $res = userModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
                                                       "No has llenado todos los campos requeridos.");
             return $res;
         }

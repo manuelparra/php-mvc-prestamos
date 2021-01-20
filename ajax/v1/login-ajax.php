@@ -14,8 +14,6 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
-$ajaxReq = true;
-
 if (isset($_POST['token']) && isset($_POST['usuario'])) {
 
     /*--- Instance to Login controller ---*/
@@ -25,7 +23,7 @@ if (isset($_POST['token']) && isset($_POST['usuario'])) {
     echo $insLogin->close_session_controller();
     exit;
 } else {
-    session_start(['name' => 'SPM',]);
+    session_start(['name' => 'SPM']);
     session_unset();
     session_destroy();
     header("Location: " . SERVER_URL . "login/");

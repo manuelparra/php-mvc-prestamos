@@ -14,8 +14,6 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
-$ajaxReq = true;
-
 if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset($_POST['usuario_id_upd'])) {
 
     /*--- Instance to user controller ---*/
@@ -46,12 +44,12 @@ if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset
         echo $insUser->add_user_controller();
         exit;
     } else {
-        echo $insUser->message_user_controller("simple", "error", "Ocurrio un error inesperado",
-                                               "No has llenado todos los campos requeridos");
+        echo $insUser->message_user_controller("simple", "error", "Ocurrió un error inesperado",
+                                               "No has llenado todos los campos requeridos.");
         exit;
     }
 } else {
-    session_start(['name' => 'SPM',]);
+    session_start(['name' => 'SPM']);
     session_unset();
     session_destroy();
     header("Location: " . SERVER_URL . "login/");

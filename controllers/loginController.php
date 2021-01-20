@@ -145,7 +145,7 @@ class loginController extends loginModel {
 
     /* Controller's function for close session */
     public function close_session_controller() {
-        session_start(['name' => 'SPM',]);
+        session_start(['name' => 'SPM']);
 
         $token = loginModel::decryption($_POST['token']);
         $usuario = loginModel::decryption($_POST['usuario']);

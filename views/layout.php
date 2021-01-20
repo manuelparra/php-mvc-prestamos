@@ -30,7 +30,6 @@ if (!defined('ABSPATH')) {
     <body>
         <?php
 
-        $ajaxReq = false;
         require_once "./controllers/viewController.php";
         $IV = new viewController(); // $IV, instanacia de la vista
 

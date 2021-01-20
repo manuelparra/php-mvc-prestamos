@@ -21,7 +21,8 @@ if ($_SESSION['privilegio_spm'] != 1) {
         <i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nostrum rerum animi natus beatae ex. Culpa blanditiis tempore amet alias placeat, obcaecati quaerat ullam, sunt est, odio aut veniam ratione.
+    Esta vista permite realizar la búsqueda de usuarios registrados en el sistema, puede utilizar como parámetro de búsqueda el DNI, Nombre, Apellido, Teléfono, Usuario o Email y se mostrar cualquier registro con el
+    que haya alguna coincidencia.
     </p>
 </div>
 
@@ -40,14 +41,19 @@ if ($_SESSION['privilegio_spm'] != 1) {
 </div>
 
 <!-- Content -->
+<?php
+if (!isset($_SESSION['busqueda_usuario']) || empty($_SESSION['busqueda_usuario'])) {
+?>
 <div class="container-fluid">
-    <form class="form-neon" action="">
+    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/search-engine-ajax/" method="POST"
+    id="new_search_form" data-form="default" autocomplete="off">
+        <input type="hidden" name="modulo" value="usuario">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="inputSearch" class="bmd-label-floating">¿Qué usuario estas buscando?</label>
-                        <input type="text" class="form-control" name="busqueda-" id="inputSearch" maxlength="30">
+                        <input type="text" class="form-control" name="busqueda_inicial" id="inputSearch" maxlength="30">
                     </div>
                 </div>
                 <div class="col-12">
@@ -59,15 +65,19 @@ if ($_SESSION['privilegio_spm'] != 1) {
         </div>
     </form>
 </div>
-
+<?php
+} else {
+?>
 <div class="container-fluid">
-    <form action="">
-        <input type="hidden" name="eliminar-busqueda" value="eliminar">
+    <form class="ajax-form" action="<?php echo SERVER_URL; ?>endpoint/search-engine-ajax/" method="POST"
+    data-form="search">
+        <input type="hidden" name="modulo" value="usuario">
+        <input type="hidden" name="eliminar_busqueda" value="eliminar">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-12 col-md-6">
                     <p class="text-center" style="font-size: 20px;">
-                        Resultados de la busqueda <strong>“Buscar”</strong>
+                        Resultados de la busqueda <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”</strong>
                     </p>
                 </div>
                 <div class="col-12">
@@ -79,122 +89,16 @@ if ($_SESSION['privilegio_spm'] != 1) {
         </div>
     </form>
 </div>
-
 <div class="container-fluid">
-    <div class="table-responsive">
-        <table class="table table-dark table-sm">
-            <thead>
-                <tr class="text-center roboto-medium">
-                    <th>#</th>
-                    <th>DNI</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDO</th>
-                    <th>TELÉFONO</th>
-                    <th>USUARIO</th>
-                    <th>EMAIL</th>
-                    <th>ACTUALIZAR</th>
-                    <th>ELIMINAR</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-center" >
-                    <td>1</td>
-                    <td>03045643</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>APELLIDO DE USUARIO</td>
-                    <td>2345456</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>ADMIN@ADMIN.COM</td>
-                    <td>
-                        <a href="<?php echo SERVER_URL; ?>user-update/" class="btn btn-success">
-                            <i class="fas fa-sync-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="">
-                            <button type="button" class="btn btn-warning">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="text-center" >
-                    <td>2</td>
-                    <td>03045643</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>APELLIDO DE USUARIO</td>
-                    <td>2345456</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>ADMIN@ADMIN.COM</td>
-                    <td>
-                        <a href="<?php echo SERVER_URL; ?>user-update/" class="btn btn-success">
-                            <i class="fas fa-sync-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="">
-                            <button type="button" class="btn btn-warning">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="text-center" >
-                    <td>3</td>
-                    <td>03045643</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>APELLIDO DE USUARIO</td>
-                    <td>2345456</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>ADMIN@ADMIN.COM</td>
-                    <td>
-                        <a href="<?php echo SERVER_URL; ?>user-update/" class="btn btn-success">
-                            <i class="fas fa-sync-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="">
-                            <button type="button" class="btn btn-warning">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <tr class="text-center" >
-                    <td>4</td>
-                    <td>03045643</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>APELLIDO DE USUARIO</td>
-                    <td>2345456</td>
-                    <td>NOMBRE DE USUARIO</td>
-                    <td>ADMIN@ADMIN.COM</td>
-                    <td>
-                        <a href="<?php echo SERVER_URL; ?>user-update/" class="btn btn-success">
-                            <i class="fas fa-sync-alt"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="">
-                            <button type="button" class="btn btn-warning">
-                                <i class="far fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
+    <?php
+
+    require_once "./controllers/userController.php";
+    $insUser = new userController();
+
+    echo $insUser->paginator_user_controller($current_page[1], 15, $_SESSION['privilegio_spm'], $_SESSION['id_spm'], $current_page[0], $_SESSION['busqueda_usuario']);
+
+    ?>
 </div>
+<?php
+}
+?>
