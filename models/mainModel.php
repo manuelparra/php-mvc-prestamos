@@ -16,8 +16,9 @@ if (!defined('ABSPATH')) {
 
 require_once "./config/server.php";
 
+/*--- Class Main Model ---*/
 class mainModel {
-    /*--- Fuction for connect to a database ---*/
+    /*-- Fuction for connect to a database --*/
     protected static function connection() {
         try {
             $conn = new PDO(CONNECTIONSTRING, USER, PASSWORD);
@@ -29,14 +30,14 @@ class mainModel {
         return $conn;
     }
 
-    /*--- Function for execute a simple query ---*/
+    /*-- Function for execute a simple query --*/
     protected static function execute_simple_query($sql) {
         $query = self::connection()->prepare($sql);
         $query->execute();
         return $query;
     }
 
-    /*--- Function for encrytion string ---*/
+    /*-- Function for encrytion string --*/
     protected static function encryption($string){
         $output=FALSE;
         $key=hash('sha256', SECRET_KEY);
@@ -46,7 +47,7 @@ class mainModel {
         return $output;
     }
 
-    /*--- Function for decryption string ---*/
+    /*-- Function for decryption string --*/
     protected static function decryption($string){
         $key=hash('sha256', SECRET_KEY);
         $iv=substr(hash('sha256', SECRET_IV), 0, 16);
@@ -54,7 +55,7 @@ class mainModel {
         return $output;
     }
 
-    /*--- Function for generate random codes ---*/
+    /*-- Function for generate random codes --*/
     protected static function generate_rendom_codes($letter, $longitude, $number) {
         for ($i = 1; $i <= $longitude; $i++) {
             $ramdom = rand(0, 9);
@@ -63,7 +64,7 @@ class mainModel {
         return $letter . '-' . $number;
     }
 
-    /*--- Function for clean string ---*/
+    /*-- Function for clean string --*/
     protected static function clean_string($string) {
         $string = str_ireplace("<script>", "", $string);
         $string = str_ireplace("</script>", "", $string);
@@ -94,7 +95,7 @@ class mainModel {
         return $string;
     }
 
-    /*--- Function for check data ---*/
+    /*-- Function for check data --*/
     protected static function check_data($filter, $string) {
         if (preg_match("/^" . $filter . "$/", $string)) {
             return false;
@@ -103,7 +104,7 @@ class mainModel {
         }
     }
 
-    /*--- Function for check date ---*/
+    /*-- Function for check date --*/
     protected static function check_date($date) {
         $date_arr = explode("-", $date);
 
@@ -114,7 +115,7 @@ class mainModel {
         }
     }
 
-    /*--- Function for generate alert message ---*/
+    /*-- Function for generate alert message --*/
     protected static function message_with_parameters($alert, $type, $title, $text, $url = NULL) {
         if ($alert == "redirect") {
             return json_encode([
@@ -131,7 +132,7 @@ class mainModel {
         }
     }
 
-    /*--- Function for paginate of data pages ---*/
+    /*-- Function for paginate of data pages --*/
     protected static function pagination_tables($page, $num_page, $url, $buttons) {
         $pre_pos_mid_button = ($buttons - 1) / 2;
 

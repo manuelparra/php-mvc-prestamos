@@ -16,14 +16,14 @@ if (!defined('ABSPATH')) {
 
 require_once "./models/viewModel.php";
 
-class viewController extends viewModel
-{
-    /*--- Controller for get template ---*/
+/*--- Class View Model */
+class viewController extends viewModel {
+    /*-- Controller for get template --*/
     public function get_template_controller() {
         return require_once "./views/layout.php";
     }
 
-    /*--- Controller for get view ---*/
+    /*-- Controller for get view --*/
     public function get_view_controller() {
         if (isset($_GET['view'])) {
             $route = explode("/", $_GET['view']);

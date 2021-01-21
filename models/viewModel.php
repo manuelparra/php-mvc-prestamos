@@ -14,8 +14,9 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
+/*--- Class View Model ---*/
 class viewModel {
-    /*--- Function for get view model ---*/
+    /*-- Function for get view model --*/
     protected static function get_view_model($view)
     {
         $whiteListView = ["home", "client-list", "client-new", "client-search",

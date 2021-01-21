@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 if (isset($_POST['token']) && isset($_POST['usuario'])) {
 
-    /*--- Instance to Login controller ---*/
+    // Instance to Login controller
     require_once "./controllers/loginController.php";
     $insLogin = new loginController();
 

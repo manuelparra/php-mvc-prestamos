@@ -16,23 +16,23 @@ if (!defined('ABSPATH')) {
 
 if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset($_POST['usuario_id_upd'])) {
 
-    /*--- Instance to user controller ---*/
+    // Instance to user controller
     require_once "./controllers/userController.php";
     $insUser = new userController();
 
-    /* Update user */
+    // Update user
     if (isset($_POST['usuario_id_upd'])) {
         echo $insUser->update_user_data_controller();
         exit;
     }
 
-    /*--- Delete user ---*/
+    // Delete user
     if (isset($_POST['usuario_id_del'])) {
         echo $insUser->delete_user_controller();
         exit;
     }
 
-    /*--- Add user ---*/
+    // Add user
     if ((isset($_POST['usuario_dni_reg']) && !empty($_POST['usuario_dni_reg'])) &&
         (isset($_POST['usuario_nombre_reg']) && !empty($_POST['usuario_nombre_reg'])) &&
         (isset($_POST['usuario_usuario_reg']) && !empty($_POST['usuario_usuario_reg'])) &&

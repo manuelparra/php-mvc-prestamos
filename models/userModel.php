@@ -18,7 +18,7 @@ require_once "./models/mainModel.php";
 
 /*--- Class User Model ---*/
 class userModel extends mainModel {
-    /*--- Function for add user ---*/
+    /*-- Function for add user --*/
     protected static function add_user_model($data) {
 
         $sql = "INSERT INTO usuario (usuario_dni, usuario_nombre, usuario_apellido,
@@ -37,7 +37,8 @@ class userModel extends mainModel {
         $query->bindParam(":perfil", $data['perfil']);
         $query->bindParam(":email", $data['email']);
         $query->bindParam(":usuario", $data['usuario']);
-        $query->bindParam(":clave", $data['clave']);
+        $query->bindParam(":cla
+        ve", $data['clave']);
         $query->bindParam(":estado", $data['estado']);
         $query->bindParam(":privilegio", $data['privilegio']);
 
@@ -46,7 +47,7 @@ class userModel extends mainModel {
         return $query;
     }
 
-    /*--- Function for delete user ---*/
+    /*-- Function for delete user --*/
     protected static function delete_user_model($id) {
 
         $sql = "DELETE FROM usuario
@@ -59,7 +60,7 @@ class userModel extends mainModel {
         return $query;
     }
 
-    /*--- Function for query user data ---*/
+    /*-- Function for query user data --*/
     protected static function query_data_user_model($type, $id) {
         if ($type == "Unique") {
             $sql = "SELECT usuario.*, perfil.perfil_nombre
@@ -80,7 +81,7 @@ class userModel extends mainModel {
         return $query;
     }
 
-    /*--- Function for query profile list ---*/
+    /*-- Function for query profile list --*/
     protected static function perfil_list_user_model() {
         $sql = "SELECT perfil_id, perfil_nombre
                 FROM perfil
@@ -90,7 +91,7 @@ class userModel extends mainModel {
         return $query;
     }
 
-    /*--- Function update user data model ---*/
+    /*-- Function update user data model --*/
     protected static function update_user_data_model($data) {
         $sql = "UPDATE usuario SET  usuario.usuario_dni = :dni, usuario.usuario_nombre = :nombre,
                 usuario.usuario_apellido = :apellido, usuario.usuario_telefono = :telefono,

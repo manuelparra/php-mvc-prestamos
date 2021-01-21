@@ -16,9 +16,9 @@ if (!defined('ABSPATH')) {
 
 require_once "./models/endpointModel.php";
 
-class endpointController extends endpointModel
-{
-    /*--- Controller's function for get ajax requests ---*/
+/*--- Endpoint Controller ---*/
+class endpointController extends endpointModel {
+    /*-- Controller's function for get ajax requests --*/
     public function get_endpoint_controller($endpoint) {
         $route = explode("/", $endpoint);
         $path = endpointModel::get_endpoint_model($route[1]);

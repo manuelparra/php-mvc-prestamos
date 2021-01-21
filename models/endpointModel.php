@@ -2,7 +2,7 @@
 /**
  * API Model Class
  *
- * All functionality pertaining to the API Model.
+ * All functionality pertaining to the Endpoint Requests for Ajax Model.
  *
  * @package Model
  * @author Manuel Parra
@@ -14,8 +14,9 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
+/*--- Class Endpoint Model ---*/
 class endpointModel {
-    /*--- Function for get ajax requests ---*/
+    /*-- Function for get ajax requests --*/
     protected static function get_endpoint_model($file) {
         $whiteListView = ["user-ajax", "login-ajax", "search-engine-ajax"];
 

@@ -19,7 +19,7 @@ include_once "./models/userModel.php";
 /*--- Class User Controller ---*/
 class userController extends userModel {
 
-    /*--- Controller's function for add user ---*/
+    /*-- Controller's function for add user --*/
     public function add_user_controller() {
         $dni = userModel::clean_string($_POST['usuario_dni_reg']);
         $nombre = userModel::clean_string($_POST['usuario_nombre_reg']);
@@ -35,7 +35,7 @@ class userController extends userModel {
 
         $privilegio = userModel::clean_string($_POST['usuario_privilegio_reg']);
 
-        /*== Check empty fields ==*/
+        // Check empty fields
         if ($dni == "" || $nombre == "" || $apellido == "" ||
             $usuario == "" || $email == "" || $clave1 == "" ||
             $clave2 == "") {
@@ -45,43 +45,43 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check data's ingrity ==*/
-        /*== Check DNI ==*/
+        // Check data's ingrity
+        // Check DNI
         if (userModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de DNI erróneo",
                                                       "El DNI no coincide con el formato solicitado.");
             return $res;
         }
 
-        /* Check first name */
+        // Check first name
         if (userModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Nombre erróneo",
                                                       "El Nombre no coincide con el formato solicitado.");
             return $res;
         }
 
-        /* Check last name */
+        // Check last name
         if (userModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Apellido erróneo",
                                                       "El Apellido no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check phone ==*/
+        // Check phone
         if ($telefono != "" && userModel::check_data("[0-9()+]{9,20}", $telefono)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Teléfono erróneo",
                                                       "El Teléfono no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check direction ==*/
+        //Check direction
         if ($direccion != "" && userModel::check_data("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Dirección erróneo",
                                                       "La Dirección no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check Perfil as a record stored in database ==*/
+        // Check Perfil as a record stored in database
         if ($perfil != "" && $perfil != "Seleccione") {
             $query = userModel::execute_simple_query("SELECT perfil_id
                                                       FROM perfil
@@ -99,21 +99,21 @@ class userController extends userModel {
             $perfil_id = NULL;
         }
 
-        /*== Check user name ==*/
+        // Check user name
         if (userModel::check_data("[a-zA-Z0-9]{1,35}", $usuario)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Usuario erróneo",
                                                       "El Usuario no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check email ==*/
+        // Check email
         if (userModel::check_data("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", $email)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Email erróneo",
                                                       "El Email no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check passwords ==*/
+        // Check passwords
         if ($clave1 == $clave2) {
             if ( userModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave1) ) {
                 $res = userModel::message_with_parameters("simple", "error", "Formato de Contraseña erróneo",
@@ -128,14 +128,14 @@ class userController extends userModel {
             return $res;
         }
 
-        /*== Check Privilege ==*/
+        // Check Privilege
         if ($privilegio < 1 || $privilegio > 3) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
                                                       "!El Privilegio seleccionado no es valido!");
             return $res;
         }
 
-        /*== Check DNI as unique data ==*/
+        // Check DNI as unique data
         $query = userModel::execute_simple_query("SELECT usuario_dni
                                                   FROM usuario
                                                   WHERE usuario_dni = '$dni'");
@@ -145,7 +145,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check user as unique data ==*/
+        // Check user as unique data
         $query = userModel::execute_simple_query("SELECT usuario_usuario
                                                   FROM usuario
                                                   WHERE usuario_usuario = '$usuario'");
@@ -155,7 +155,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check email as unique data ==*/
+        // Check email as unique data
         $query = userModel::execute_simple_query("SELECT usuario_email
                                                   FROM usuario
                                                   WHERE usuario_email = '$email'");
@@ -191,12 +191,12 @@ class userController extends userModel {
         return $res;
     }
 
-    /*--- Controller's function for sent message user ---*/
+    /*-- Controller's function for sent message user --*/
     public function message_user_controller($alert, $type, $title, $text) {
         return userModel::message_with_parameters($alert, $type, $title, $text);
     }
 
-    /*--- Controller's function for users pagination ---*/
+    /*-- Controller's function for users pagination --*/
     public function paginator_user_controller($page, $records, $privilege, $id, $url, $search) {
         $page = userModel::clean_string($page);
         $records = userModel::clean_string($records);
@@ -309,7 +309,7 @@ class userController extends userModel {
                 ';
             } else {
                 $table .= '
-                <tr class="text-center" >
+                <tr class="text-center"
                     <td colspan="9">No hay registros en el sistema</td>
                 </tr>
                 ';
@@ -336,20 +336,20 @@ class userController extends userModel {
         return $html;
     }
 
-    /*--- Controller's function for delete user ---*/
+    /*-- Controller's function for delete user --*/
     public function delete_user_controller() {
         /* reciving user id */
         $id = userModel::decryption($_POST['usuario_id_del']);
         $id = userModel::clean_string($id);
 
-        /* Checking primary user  */
+        // Checking primary user
         if ($id == 1) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
                                                       "No podemos eliminar el usuario principal del sistema.");
             return $res;
         }
 
-        /* Checking that the user exists in the database */
+        // Checking that the user exists in the database
         $sql = "SELECT usuario.usuario_id
                 FROM usuario
                 WHERE usuario.usuario_id = '$id'";
@@ -361,7 +361,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /* Checking if the user has associated loan redords */
+        // Checking if the user has associated loan redords
         $sql = "SELECT prestamo.usuario_id
                 FROM prestamo
                 WHERE prestamo.usuario_id = '$id'
@@ -373,7 +373,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /* Checking privileges of current user */
+        // Checking privileges of current user
         session_start(['name' => 'SPM']);
         if ($_SESSION['privilegio_spm'] != 1) {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
@@ -392,7 +392,7 @@ class userController extends userModel {
         return $res;
     }
 
-    /*--- Controller's function for query data user ---*/
+    /*-- Controller's function for query data user --*/
     public function query_data_user_controller($type, $id = NULL) {
         $type = userModel::clean_string($type);
 
@@ -403,19 +403,19 @@ class userController extends userModel {
         return userModel::query_data_user_model($type, $id);
     }
 
-    /*--- Controller's function for query perfil list user ---*/
+    /*-- Controller's function for query perfil list user --*/
     public function query_perfil_list_user_model() {
         return userModel::perfil_list_user_model();
     }
 
-    /*--- Controller's function update user data ---*/
+    /*-- Controller's function update user data --*/
     public function update_user_data_controller() {
-        /* Receiving the id  */
+        // Receiving the id
         $id = userModel::decryption($_POST['usuario_id_upd']);
         $id = userModel::clean_string($id);
         $id = (int) $id;
 
-        /* Checking user id in the database */
+        // Checking user id in the database
         $sql = "SELECT usuario.*
                 FROM usuario
                 WHERE usuario.usuario_id = '$id'";
@@ -451,7 +451,7 @@ class userController extends userModel {
 
         $account_type = userModel::clean_string($_POST['account_type']);
 
-        /*== Check empty fields ==*/
+        // Check empty fields
         if ($dni == "" || $nombre == "" || $apellido == "" ||
             $usuario == "" || $email == "" || $admin_usuario == "" ||
             $admin_clave == "") {
@@ -461,43 +461,43 @@ class userController extends userModel {
             return $res;
         }
 
-        /*==  Check data's ingrity ==*/
-        /*== Check DNI ==*/
+        // Check data's ingrity
+        // Check DNI
         if (userModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de DNI erróneo",
                                                       "El DNI no coincide con el formato solicitado.");
             return $res;
         }
 
-        /* Check first name */
+        // Check first name
         if (userModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $nombre)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Nombre erróneo",
                                                       "El Nombre no coincide con el formato solicitado.");
             return $res;
         }
 
-        /* Check last name */
+        // Check last name
         if (userModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}", $apellido)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Apellido erróneo",
                                                       "El Apellido no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check phone ==*/
+        // Check phone
         if ($telefono != "" && userModel::check_data("[0-9()+]{9,20}", $telefono)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Teléfono erróneo",
                                                       "El Teléfono no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check direction ==*/
+        // Check direction
         if ($direccion != "" && userModel::check_data("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Dirección erróneo",
                                                       "La Dirección no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check Perfil as a record stored in database ==*/
+        // Check Perfil as a record stored in database
         $perfil_id = !is_null($fields['usuario_perfil_id']) ? (int) $fields['usuario_perfil_id'] : NULL;
 
         if ($perfil != "" && $perfil != "Seleccione") {
@@ -514,16 +514,16 @@ class userController extends userModel {
             }
         }
 
-        /*== Check user name ==*/
+        // Check user name
         if (userModel::check_data("[a-zA-Z0-9]{1,35}", $usuario)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Usuario erróneo",
                                                       "El Usuario no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check email ==*/
+        // Check email
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            /*==  Check email as unique data ==*/
+            // Check email as unique data
             if ($email != $fields['usuario_email']) {
                 $query = userModel::execute_simple_query("SELECT usuario_email
                                                           FROM usuario
@@ -540,14 +540,14 @@ class userController extends userModel {
             return $res;
         }
 
-        /*== Check status ==*/
+        // Check status
         if ($estado != "Activa" && $estado != "Deshabilitada") {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
                                                       "!El Estado de la cuenta no es valido!");
             return $res;
         }
 
-        /*== Check passwords ==*/
+        // Check passwords
         if ($clave1 != "" || $clave2 != "") {
             if ($clave1 == $clave2) {
                 if (userModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $clave1)) {
@@ -565,7 +565,7 @@ class userController extends userModel {
             $clave = $fields['usuario_clave'];
         }
 
-        /*== Check Privilege ==*/
+        // Check Privilege
         $privilegio = (int) $privilegio;
 
         if ($privilegio < 1 || $privilegio > 3) {
@@ -574,14 +574,14 @@ class userController extends userModel {
             return $res;
         }
 
-        /*== Check admin user ==*/
+        // Check admin user
         if (userModel::check_data("[a-zA-Z0-9]{1,35}", $admin_usuario)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Usuario erróneo",
                                                       "Tu usuario no coincide con el formato solicitado.");
             return $res;
         }
 
-        /*== Check admin clave ==*/
+        // Check admin clave
         if (userModel::check_data("^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,100}$", $admin_clave)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Clave erróneo",
                                                       "Tu clave de usuario no coincide con el formato solicitado.");
@@ -590,7 +590,7 @@ class userController extends userModel {
 
         $admin_clave = userModel::encryption($admin_clave);
 
-        /*== Check DNI as unique data ==*/
+        // Check DNI as unique data
         if ($dni != $fields['usuario_dni']) {
             $query = userModel::execute_simple_query("SELECT usuario_dni
                                                       FROM usuario
@@ -602,7 +602,7 @@ class userController extends userModel {
             }
         }
 
-        /*==  Check user as unique data ==*/
+        // Check user as unique data
         if ($usuario != $fields['usuario_usuario']) {
             $query = userModel::execute_simple_query("SELECT usuario_usuario
                                                       FROM usuario
@@ -614,7 +614,7 @@ class userController extends userModel {
             }
         }
 
-        /*== Checking credentials to update data  ==*/
+        // Checking credentials to update data
         if ($account_type == "Propia") {
             $sql = "SELECT usuario_id
                     FROM usuario
@@ -646,7 +646,7 @@ class userController extends userModel {
             return $res;
         }
 
-        /*== Preparing data to send to the model ==*/
+        // Preparing data to send to the model
         $data = [
             "dni" => $dni,
             "nombre" => $nombre,
@@ -662,7 +662,7 @@ class userController extends userModel {
             "id" => $id
         ];
 
-        /*== Sending data to update user model ==*/
+        // Sending data to update user model
         if (userModel::update_user_data_model($data)) {
             $res = userModel::message_with_parameters("reload", "success", "Datos Actualizados",
                                                       "Los datos han sido actualizados con éxito.");

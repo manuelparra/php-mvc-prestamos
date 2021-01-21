@@ -131,7 +131,7 @@ class loginController extends loginModel {
         }
     }
 
-    /* Controller's function for forse close session */
+    /*-- Controller's function for forse close session --*/
     public function force_close_session_controller() {
         session_unset();
         session_destroy();
@@ -143,7 +143,7 @@ class loginController extends loginModel {
         }
     }
 
-    /* Controller's function for close session */
+    /*-- Controller's function for close session --*/
     public function close_session_controller() {
         session_start(['name' => 'SPM']);
 
@@ -161,7 +161,7 @@ class loginController extends loginModel {
         return $res;
     }
 
-    /* Controller's function for encryp data */
+    /*-- Controller's function for encryp data --*/
     public function encrypt_data($string) {
         return loginModel::encryption($string);
     }
