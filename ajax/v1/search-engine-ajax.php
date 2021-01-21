@@ -1,8 +1,8 @@
 <?php
 /**
- * Ajax Search Engine Class
+ * Ajax Search Engine Script
  *
- * All functionality pertaining to the Ajax Search Engine.
+ * All functionality pertaining to the Ajax Search Engine requests.
  *
  * @package Ajax Request
  * @author Manuel Parra

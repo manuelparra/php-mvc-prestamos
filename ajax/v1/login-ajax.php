@@ -1,8 +1,8 @@
 <?php
 /**
- * Ajax Login Class
+ * Ajax Login Script
  *
- * All functionality pertaining to the Ajax Login request.
+ * All functionality pertaining to the Ajax Login requests.
  *
  * @package Ajax Request
  * @author Manuel Parra

@@ -1,8 +1,8 @@
 <?php
 /**
- * Ajax User Class
+ * Ajax User Script
  *
- * All functionality pertaining to the Ajax User request.
+ * All functionality pertaining to the Ajax User requests.
  *
  * @package Ajax Request
  * @author Manuel Parra
@@ -15,7 +15,6 @@ if (!defined('ABSPATH')) {
 }
 
 if (isset($_POST['usuario_dni_reg']) || isset($_POST['usuario_id_del']) || isset($_POST['usuario_id_upd'])) {
-
     // Instance to user controller
     require_once "./controllers/userController.php";
     $insUser = new userController();

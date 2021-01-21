@@ -2,3 +2,8 @@
 login
 login
 ./views/contents/home-view.php
+login
+login
+./views/contents/home-view.php
+./views/contents/user-list-view.php
+./views/contents/user-new-view.php

@@ -37,8 +37,7 @@ class userModel extends mainModel {
         $query->bindParam(":perfil", $data['perfil']);
         $query->bindParam(":email", $data['email']);
         $query->bindParam(":usuario", $data['usuario']);
-        $query->bindParam(":cla
-        ve", $data['clave']);
+        $query->bindParam(":clave", $data['clave']);
         $query->bindParam(":estado", $data['estado']);
         $query->bindParam(":privilegio", $data['privilegio']);
 

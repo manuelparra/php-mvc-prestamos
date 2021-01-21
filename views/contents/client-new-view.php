@@ -24,7 +24,8 @@
 
 <!-- Content here-->
 <div class="container-fluid">
-    <form action="" class="form-neon" autocomplete="off">
+    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/client-ajax/" method="POST"
+    id="new_registration_form" data-form="save" autocomplete="off">
         <fieldset>
             <legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
             <div class="container-fluid">
@@ -32,13 +33,14 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="cliente_dni" class="bmd-label-floating">DNI</label>
-                            <input type="text" pattern="[0-9-]{1,27}" class="form-control" name="cliente_dni_reg" id="cliente_dni" maxlength="27">
+                            <input type="text" pattern="[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}" class="form-control" name="cliente_dni_reg" id="cliente_dni" maxlength="27"
+                            title="Debe contener ocho numeros, un guión y una letra mayúscula" required >
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
-                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre_reg" id="cliente_nombre" maxlength="40">
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre_reg" id="cliente_nombre" maxlength="40" required >
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
@@ -56,7 +58,7 @@
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-                            <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}" class="form-control" name="cliente_direccion_reg" id="cliente_direccion" maxlength="150">
+                            <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}" class="form-control" name="w" id="cliente_direccion" maxlength="150">
                         </div>
                     </div>
                 </div>
