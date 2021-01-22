@@ -86,7 +86,9 @@ class mainModel {
         $string = str_ireplace("[", "", $string);
         $string = str_ireplace("]", "", $string);
         $string = str_ireplace("^", "", $string);
+        $string = str_ireplace("=", "", $string);
         $string = str_ireplace("==", "", $string);
+        $string = str_ireplace("===", "", $string);
         $string = str_ireplace(";", "", $string);
         $string = str_ireplace("::", "", $string);
         $string = stripcslashes($string);   // Delete backslash

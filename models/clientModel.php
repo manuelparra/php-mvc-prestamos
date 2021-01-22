@@ -24,7 +24,7 @@ class clientModel extends mainModel {
         // SQL Query for insert client
         $sql = "INSERT INTO cliente (cliente_dni, cliente_nombre, cliente_apellido,
                 cliente_telefono, cliente_direccion)
-                VALUES (:dni, :nombre, :apellido, :telelefono, :direccion)";
+                VALUES (:dni, :nombre, :apellido, :telefono, :direccion)";
         $query = mainModel::connection()->prepare($sql);
 
         $query->bindParam(":dni", $data['dni']);

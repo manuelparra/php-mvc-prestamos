@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-if (isset($_POST['cliente_dni_reg"'])) {
+if (isset($_POST['cliente_dni_reg'])) {
     // Instance to client controller
     require_once "./controllers/clientController.php";
     $insClient = new clientController();

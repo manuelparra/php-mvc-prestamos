@@ -45,7 +45,7 @@ class userController extends userModel {
             return $res;
         }
 
-        // Check data's ingrity
+        // Check data's integrity
         // Check DNI
         if (userModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de DNI erróneo",
@@ -74,7 +74,7 @@ class userController extends userModel {
             return $res;
         }
 
-        //Check direction
+        //Check address
         if ($direccion != "" && userModel::check_data("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)) {
             $res = userModel::message_with_parameters("simple", "error", "Formato de Dirección erróneo",
                                                       "La Dirección no coincide con el formato solicitado.");
@@ -135,7 +135,7 @@ class userController extends userModel {
             return $res;
         }
 
-        // Check DNI as unique data
+        // Check DNI as unique data in database
         $query = userModel::execute_simple_query("SELECT usuario_dni
                                                   FROM usuario
                                                   WHERE usuario_dni = '$dni'");
@@ -145,7 +145,7 @@ class userController extends userModel {
             return $res;
         }
 
-        // Check user as unique data
+        // Check user as unique data in database
         $query = userModel::execute_simple_query("SELECT usuario_usuario
                                                   FROM usuario
                                                   WHERE usuario_usuario = '$usuario'");
@@ -155,7 +155,7 @@ class userController extends userModel {
             return $res;
         }
 
-        // Check email as unique data
+        // Check email as unique data in database
         $query = userModel::execute_simple_query("SELECT usuario_email
                                                   FROM usuario
                                                   WHERE usuario_email = '$email'");
