@@ -296,6 +296,7 @@ class userController extends userModel {
                     </td>
                 </tr>
                 ';
+
                 $count++;
             }
 
