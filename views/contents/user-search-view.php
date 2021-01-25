@@ -69,7 +69,7 @@ if (!isset($_SESSION['busqueda_usuario']) || empty($_SESSION['busqueda_usuario']
 } else {
 ?>
 <div class="container-fluid">
-    <form class="ajax-form" action="<?php echo SERVER_URL; ?>endpoint/search-engine-ajax/" method="POST"
+    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/search-engine-ajax/" method="POST"
     data-form="search">
         <input type="hidden" name="modulo" value="usuario">
         <input type="hidden" name="eliminar_busqueda" value="eliminar">

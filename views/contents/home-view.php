@@ -22,7 +22,7 @@
 
 <!-- Content -->
 <div class="full-box tile-container">
-    <a href="<?php echo SERVER_URL; ?>client-new/" class="tile">
+    <a href="<?php echo SERVER_URL; ?>client-list/" class="tile">
         <div class="tile-tittle">Clientes</div>
         <div class="tile-icon">
             <i class="fas fa-users fa-fw"></i>
