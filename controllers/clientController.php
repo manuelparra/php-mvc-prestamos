@@ -202,7 +202,7 @@
                     $table .= '
                         <td>
                             <form class="ajax-form"  action="' . SERVER_URL . 'endpoint/client-ajax/" method="POST" data-form="delete" autocomplete="off">
-                                <input type="hidden" name="usuario_id_del" value="' . clientModel::encryption($row['cliente_id']) . '">
+                                <input type="hidden" name="cliente_id_del" value="' . clientModel::encryption($row['cliente_id']) . '">
                                 <button type="submit" class="btn btn-warning">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
@@ -250,5 +250,59 @@
         }
 
         return $html;
+    }
+
+    /*-- Controller's function for delete client --*/
+    public function delete_client_controller() {
+        // reciving client id
+        $id = clientModel::decryption($_POST['cliente_id_del']);
+        $id = clientModel::clean_string($id);
+
+        // Checking that the client exists in the database
+        $sql = "SELECT cliente.cliente_id
+                FROM cliente
+                WHERE cliente.cliente_id = '$id'";
+        $query = clientModel::execute_simple_query($sql);
+
+        if (!$query->rowCount() > 0) {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                        "¡El cliente que intenta eliminar no existe en el sistema!");
+            return $res;
+        }
+
+        // Cheching if the client has associated loan records
+        $sql = "SELECT prestamo.cliente_id
+                FROM prestamo
+                WHERE prestamo.cliente_id = '$id'
+                LIMIT 1";
+        $query = clientModel::execute_simple_query($sql);
+
+        if ($query->rowCount() > 0) {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                        "No podemos elminar el cliente del sistema porque tiene prestamos asociados");
+
+            return $res;
+        }
+
+        // Checking privileges of current user
+        session_start(['name' => 'SPM']);
+        if ($_SESSION['privilegio_spm'] != 1) {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
+                                                        "¡No tienes los permisos necesarios para realizar esta operación!");
+            return $res;
+        }
+
+        // Deleting client of the system
+        $query = clientModel::delete_client_model($id);
+
+        if ($query->rowCount() == 1) {
+            $res = clientModel::message_with_parameters("reload", "success", "Cliente eliminado",
+                                                        "El cliente ha sido eliminado del sistema con exito.");
+        } else {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                        "No hemos podido eliminar el cliente, por favor intentelo nuevamente");
+        }
+
+        return $res;
     }
  }

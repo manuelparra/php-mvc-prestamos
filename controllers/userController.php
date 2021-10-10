@@ -339,7 +339,7 @@ class userController extends userModel {
 
     /*-- Controller's function for delete user --*/
     public function delete_user_controller() {
-        /* reciving user id */
+        // reciving user id
         $id = userModel::decryption($_POST['usuario_id_del']);
         $id = userModel::clean_string($id);
 
@@ -362,7 +362,7 @@ class userController extends userModel {
             return $res;
         }
 
-        // Checking if the user has associated loan redords
+        // Checking if the user has associated loan records
         $sql = "SELECT prestamo.usuario_id
                 FROM prestamo
                 WHERE prestamo.usuario_id = '$id'
@@ -382,14 +382,17 @@ class userController extends userModel {
             return $res;
         }
 
+        // Deleting user of the system
         $query = userModel::delete_user_model($id);
+
         if ($query->rowCount() == 1) {
             $res = userModel::message_with_parameters("reload", "success", "Usuario eliminado",
-                                                      "El usuario ha sido eliminado del sistema exitosamente.");
+                                                      "El usuario ha sido eliminado del sistema con exito.");
         } else {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
-                                                      "No hemos podido eliminar el usuario, por favor, intente nuevamente.");
+                                                      "No hemos podido eliminar el usuario, por favor intentelo nuevamente.");
         }
+
         return $res;
     }
 

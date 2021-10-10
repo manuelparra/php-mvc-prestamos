@@ -20,8 +20,3 @@ RewriteRule ^ %{REQUEST_URI}.php [NC,L]
 
 # Redirect 404 errors
 ErrorDocument 404 /views=404/
-
-
-
-
-

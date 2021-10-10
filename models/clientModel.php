@@ -37,4 +37,16 @@ class clientModel extends mainModel {
 
         return $query;
     }
+
+    /*-- Funciton for delete client --*/
+    protected static function delete_client_model($id) {
+        $sql = "DELETE FROM cliente
+                WHERE cliente.cliente_id = :id";
+        $query = mainModel::connection()->prepare($sql);
+
+        $query->bindParam(":id", $id);
+        $query->execute();
+
+        return $query;
+    }
 }

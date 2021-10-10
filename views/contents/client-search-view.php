@@ -1,3 +1,15 @@
+<?php
+/**
+ * Contents of Client Search view.
+ *
+ * Contents of Client Search page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+?>
+
 <!-- Page header -->
 <div class="full-box page-header">
     <h3 class="text-left">

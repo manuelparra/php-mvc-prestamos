@@ -20,13 +20,12 @@ require_once "./models/mainModel.php";
 class userModel extends mainModel {
     /*-- Function for add user --*/
     protected static function add_user_model($data) {
-
+        // SQL Query for insert user
         $sql = "INSERT INTO usuario (usuario_dni, usuario_nombre, usuario_apellido,
                 usuario_telefono, usuario_direccion, usuario_perfil_id, usuario_email,
                 usuario_usuario, usuario_clave, usuario_estado, usuario_privilegio)
                 VALUES (:dni, :nombre, :apellido, :telefono, :direccion, :perfil,
                 :email, :usuario, :clave, :estado, :privilegio)";
-
         $query = mainModel::connection()->prepare($sql);
 
         $query->bindParam(":dni", $data['dni']);
@@ -99,7 +98,6 @@ class userModel extends mainModel {
                 usuario.usuario_estado = :estado, usuario.usuario_privilegio = :privilegio,
                 usuario.usuario_perfil_id = :perfil_id
                 WHERE usuario.usuario_id = :id ";
-
         $query = mainModel::connection()->prepare($sql);
 
         $query->bindParam(":dni", $data['dni']);
