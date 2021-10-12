@@ -1,10 +1,27 @@
+<?php
+/**
+ * Contents of Client Data Update view
+ *
+ * Contents of the user Data Update page view.
+ *
+ * @package View
+ * @author Manuel Parra
+ * @version 1.0.0
+ */
+
+ if ($_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1]) {
+    echo $insLoginController->force_close_session_controller();
+    exit;
+ }
+?>
+
 <!-- Page header -->
 <div class="full-box page-header">
     <h3 class="text-left">
         <i class="fas fa-sync-alt fa-fw"></i> &nbsp; ACTUALIZAR CLIENTE
     </h3>
     <p class="text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem odit amet asperiores quis minus, dolorem repellendus optio doloremque error a omnis soluta quae magnam dignissimos, ipsam, temporibus sequi, commodi accusantium!
+        Esta vista permite la modificación de los datos de clientes del sistema, puede modificar los datos del usuario.
     </p>
 </div>
 

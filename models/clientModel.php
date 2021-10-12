@@ -38,7 +38,7 @@ class clientModel extends mainModel {
         return $query;
     }
 
-    /*-- Funciton for delete client --*/
+    /*-- Function for delete client --*/
     protected static function delete_client_model($id) {
         $sql = "DELETE FROM cliente
                 WHERE cliente.cliente_id = :id";
@@ -48,5 +48,10 @@ class clientModel extends mainModel {
         $query->execute();
 
         return $query;
+    }
+
+    /*-- Function for query client data--*/
+    protected static function query_data_client_model($id) {
+
     }
 }

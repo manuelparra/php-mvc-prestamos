@@ -8,7 +8,7 @@
       "name": "Listen for XDebug",
       "type": "php",
 			"request": "launch",
-			"serverSourceRoot": "/var/www/html/learning/fullstack/php/sistemas/prestamos",
+			"serverSourceRoot": "/var/www/html/learning/fullstack/php/mvc/prestamos",
 			"localSourceRoot": "${workspaceRoot}",
       "port": 9003
     },
