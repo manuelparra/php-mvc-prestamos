@@ -52,7 +52,6 @@ if ($_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESS
     if ($query->rowCount() == 1) {
         $fields = $query->fetch();
     ?>
-
     <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/user-ajax/" method="POST" data-form="update" autocomplete="off">
         <input type="hidden" name="usuario_id_upd" value="<?php echo $current_page[1]; ?>">
         <fieldset>
@@ -69,7 +68,7 @@ if ($_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESS
 
                     <div class="col-12 col-md-4">
                         <div class="form-group">
-                            <label for="usuario_nombre" class="bmd-label-floating">Nombres</label>
+                            <label for="usuario_nombre" class="bmd-label-floating">Nombre</label>
                             <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="usuario_nombre_upd"
                             id="usuario_nombre" maxlength="35" value="<?php echo $fields['usuario_nombre']; ?>">
                         </div>

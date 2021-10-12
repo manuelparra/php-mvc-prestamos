@@ -51,7 +51,20 @@ class clientModel extends mainModel {
     }
 
     /*-- Function for query client data--*/
-    protected static function query_data_client_model($id) {
+    protected static function query_data_client_model($type, $id) {
+        if ($type == "Unique") {
+            $sql = "SELECT cliente.*
+                    FROM cliente
+                    WHERE cliente.cliente_id = :id";
+            $query = mainModel::connection()->prepare($sql);
+            $query->bindParam(":id", $id);
+        } elseif ($type == "Count") {
+            $sql = "SELECT cliente.cliente_id
+                    FROM cliente";
+            $query = mainModel::connection()->prepare($sql);
+        }
 
+        $query->execute();
+        return $query;
     }
 }

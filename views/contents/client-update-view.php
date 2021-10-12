@@ -9,10 +9,10 @@
  * @version 1.0.0
  */
 
- if ($_SESSION['privilegio_spm'] != 1 && $insLoginController->encrypt_data($_SESSION['id_spm']) != $current_page[1]) {
+if ($_SESSION['privilegio_spm'] != 1) {
     echo $insLoginController->force_close_session_controller();
     exit;
- }
+}
 ?>
 
 <!-- Page header -->
@@ -25,6 +25,7 @@
     </p>
 </div>
 
+<?php if ($_SESSION['privilegio_spm'] == 1) { ?> <!-- Show the fallowing options if the user privilege is iqual to 1 (admin) -->
 <div class="container-fluid">
     <ul class="full-box list-unstyled page-nav-tabs">
         <li>
@@ -38,10 +39,21 @@
         </li>
     </ul>
 </div>
+<?php } ?>
 
-<!-- Content here-->
+<!-- Content -->
 <div class="container-fluid">
-    <form action="" class="form-neon" autocomplete="off">
+    <?php
+    require_once "./controllers/clientController.php";
+    $insClientController = new clientController();
+
+    $query = $insClientController->query_data_client_controller('Unique', $current_page[1]);
+
+    if ($query->rowCount() == 1) {
+        $fields = $query->fetch();
+    ?>
+    <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/client-ajax/" method="POST" data-form="update" autocomplete="off">
+        <input type="hidden" name="cliente_id_upd" vale="<?php echo $current_page[1]; ?>">
         <fieldset>
             <legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
             <div class="container-fluid">
@@ -49,31 +61,36 @@
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="cliente_dni" class="bmd-label-floating">DNI</label>
-                            <input type="text" pattern="[0-9-]{1,27}" class="form-control" name="cliente_dni_up" id="cliente_dni" maxlength="27">
+                            <input type="text" pattern="[0-9]{8}[\-]{1}[TRWAGMYFPDXBNJZSQVHLCKE]{1}" class="form-control" name="cliente_dni_upd"
+                            id="cliente_dni" maxlength="10" value="<?php echo $fields['cliente_dni']; ?>">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
-                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_nombre_up" id="cliente_nombre" maxlength="40">
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_nombre_upd"
+                            id="cliente_nombre" maxlength="35" value="<?php echo $fields['cliente_nombre']; ?>">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group">
-                            <label for="cliente_apellido" class="bmd-label-floating">Apellido</label>
-                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control" name="cliente_apellido_up" id="cliente_apellido" maxlength="40">
+                            <label for="cliente_apellido" class="bmd-label-floating">Apellidos</label>
+                            <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}" class="form-control" name="cliente_apellido_upd"
+                            id="cliente_apellido" maxlength="35" value="<?php echo $fields['cliente_apellido']; ?>">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
-                            <input type="text" pattern="[0-9()+]{8,20}" class="form-control" name="cliente_telefono_up" id="cliente_telefono" maxlength="20">
+                            <input type="text" pattern="[0-9()+]{9,20}" class="form-control" name="cliente_telefono_upd"
+                            id="cliente_telefono" maxlength="20" value="<?php echo $fields['cliente_telefono']; ?>">
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-                            <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,150}" class="form-control" name="cliente_direccion_up" id="cliente_direccion" maxlength="150">
+                            <input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}" class="form-control" name="cliente_direccion_upd"
+                            id="cliente_direccion" maxlength="190" value="<?php echo $fields['cliente_direccion']; ?>">
                         </div>
                     </div>
                 </div>
@@ -84,10 +101,15 @@
             <button type="submit" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"></i> &nbsp; ACTUALIZAR</button>
         </p>
     </form>
-
+    <?php
+    } else {
+    ?>
     <div class="alert alert-danger text-center" role="alert">
         <p><i class="fas fa-exclamation-triangle fa-5x"></i></p>
         <h4 class="alert-heading">¡Ocurrió un error inesperado!</h4>
         <p class="mb-0">Lo sentimos, no podemos mostrar la información solicitada debido a un error.</p>
     </div>
+    <?php
+    }
+    ?>
 </div>

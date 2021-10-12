@@ -305,4 +305,16 @@
 
         return $res;
     }
+
+    /*-- Controller's function for query client user --*/
+    public function query_data_client_controller($type, $id = NULL) {
+        $type = clientModel::clean_string($type);
+
+        if (!is_null($id)) {
+            $id = clientModel::decryption($id);
+            $id = clientModel::clean_string($id);
+        }
+
+        return clientModel::query_data_client_model($type, $id);
+    }
  }
