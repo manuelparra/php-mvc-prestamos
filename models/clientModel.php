@@ -67,4 +67,27 @@ class clientModel extends mainModel {
         $query->execute();
         return $query;
     }
+
+    /*-- Function for update client data model --*/
+    protected static function update_client_data_model($data) {
+        $sql = "UPDATE cliente SET
+                cliente.cliente_dni = :dni,
+                cliente.cliente_nombre = :nombre,
+                cliente.cliente_apellido = :apellido,
+                cliente.cliente_telefono = :telefono,
+                cliente.cliente_direccion = :direccion
+                WHERE cliente.cliente_id= :id";
+        $query = mainModel::connection()->prepare($sql);
+
+        $query->bindParam(":dni", $data['dni']);
+        $query->bindParam(":nombre", $data['nombre']);
+        $query->bindParam(":apellido", $data['apellido']);
+        $query->bindParam(":telefono", $data['telefono']);
+        $query->bindParam(":direccion", $data['direccion']);
+        $query->bindParam(":id", $data['id']);
+
+        $query->execute();
+
+        return $query;
+    }
 }

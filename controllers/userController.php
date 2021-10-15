@@ -672,7 +672,7 @@ class userController extends userModel {
                                                       "Los datos han sido actualizados con éxito.");
         } else {
             $res = userModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado",
-                                                      "No se hemos podido actualizar los datos, por favor, intente nuevamente.");
+                                                      "No hemos podido actualizar los datos, por favor, intente nuevamente.");
         }
 
         return $res;

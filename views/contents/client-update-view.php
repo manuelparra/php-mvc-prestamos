@@ -53,7 +53,7 @@ if ($_SESSION['privilegio_spm'] != 1) {
         $fields = $query->fetch();
     ?>
     <form class="form-neon ajax-form" action="<?php echo SERVER_URL; ?>endpoint/client-ajax/" method="POST" data-form="update" autocomplete="off">
-        <input type="hidden" name="cliente_id_upd" vale="<?php echo $current_page[1]; ?>">
+        <input type="hidden" name="cliente_id_upd" value="<?php echo $current_page[1]; ?>">
         <fieldset>
             <legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
             <div class="container-fluid">

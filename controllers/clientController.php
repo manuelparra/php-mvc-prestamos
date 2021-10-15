@@ -317,4 +317,102 @@
 
         return clientModel::query_data_client_model($type, $id);
     }
+
+    /*-- Controller's function for sent message user --*/
+    public function message_client_controller($alert, $type, $title, $text) {
+        return clientModel::message_with_parameters($alert, $type, $title, $text);
+    }
+
+    /*-- Controller's function update client data --*/
+    public function update_client_data_controller() {
+        // Recieving the id
+        $id = clientModel::decryption($_POST['cliente_id_upd']);
+        $id = clientModel::clean_string($id);
+        $id = (int) $id;
+
+        // Checking client id in the database
+        $sql = "SELECT cliente.*
+                FROM cliente
+                WHERE cliente.cliente_id = $id";
+        $query = clientModel::execute_simple_query($sql);
+
+        if ($query->rowCount() == 1) {
+            $fields = $query->fetch();
+        } else {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrío un error inesperado.",
+                                                        "El cliente no existe en base de datos, intente nuevamente.");
+            return $res;
+        }
+
+        $dni = clientModel::clean_string($_POST['cliente_dni_upd']);
+        $nombre = clientModel::clean_string($_POST['cliente_nombre_upd']);
+        $apellido = clientModel::clean_string($_POST['cliente_apellido_upd']);
+        $telefono = clientModel::clean_string($_POST['cliente_telefono_upd']);
+        $direccion = clientModel::clean_string($_POST['cliente_direccion_upd']);
+
+        // Check empty fields
+        if ($dni == "" || $nombre == "" || $apellido == "" ||
+            $telefono == "" || $direccion == "") {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrió un error inesperado",
+                                                        "No has llenado todos los campos requeridos");
+            return $res;
+        }
+
+        // Check data's integrity
+        // Check DNI
+        if (clientModel::check_data("[0-9]{8}[-]{1}[TRWAechoGMYFPDXBNJZSQVHLCKE]{1}", $dni)) {
+            $res = clientModel::message_with_parameters("simple", "error", "Formato de DNI erróneo",
+                                                        "El DNI no coincide con el formato solicitado.");
+            return $res;
+        }
+
+        // Check first name
+        if (clientModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}", $nombre)) {
+            $res = clientModel::message_with_parameters("simple", "error", "Formato de Nombre erróneo",
+                                                        "El Nombre no coincide con el formato solicitado.");
+            return $res;
+        }
+
+        // Check last name
+        if (clientModel::check_data("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}", $apellido)) {
+            $res = clientModel::message_with_parameters("simple", "error", "Formato de Apellido erróneo",
+                                                        "El Apellido no coincide con el formato solicitado.");
+            return $res;
+        }
+
+        // Check phone
+        if (clientModel::check_data("[0-9()+]{9,20}", $telefono)) {
+            $res = clientModel::message_with_parameters("simple", "error", "Formato de Telefono erróneo",
+                                                        "El Telefono no coincide con el formato solicitado.");
+            return $res;
+        }
+
+        // Check address
+        if (clientModel::check_data("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,#\- ]{1,190}", $direccion)){
+            $res = clientModel::message_with_parameters("simple", "error", "Formato de Dirección erróneo",
+                                                        "La Dirección no coincide coon el formato solicitado.");
+            return $res;
+        }
+
+        // Preparing data to send to the model
+        $data = [
+            "dni" => $dni,
+            "nombre" => $nombre,
+            "apellido" => $apellido,
+            "telefono" => $telefono,
+            "direccion" => $direccion,
+            "id" => $id
+        ];
+
+        // Sending data to update user model
+        if (clientModel::update_client_data_model($data)) {
+            $res = clientModel::message_with_parameters("reload", "success", "Datos Actualizados",
+                                                        "Los datos han sido actualizados con éxito.");
+        } else {
+            $res = clientModel::message_with_parameters("simple", "error", "Ocurrio un error inesperado",
+                                                        "No hemos podido actualizar los datos, por favor, intentelo nuevamente.");
+        }
+
+        return $res;
+    }
  }

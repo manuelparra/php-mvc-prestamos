@@ -97,7 +97,7 @@ class userModel extends mainModel {
                 usuario.usuario_usuario = :usuario, usuario.usuario_clave = :clave,
                 usuario.usuario_estado = :estado, usuario.usuario_privilegio = :privilegio,
                 usuario.usuario_perfil_id = :perfil_id
-                WHERE usuario.usuario_id = :id ";
+                WHERE usuario.usuario_id = :id";
         $query = mainModel::connection()->prepare($sql);
 
         $query->bindParam(":dni", $data['dni']);
